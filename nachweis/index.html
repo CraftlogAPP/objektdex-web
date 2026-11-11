@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- Auftraggeber-Ansicht: privat, nie in Suchmaschinen; Token steht hinter # (geht nie an einen Server-Log) -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Leistungsnachweis · ObjektDex</title>
+  <link rel="icon" type="image/png" href="/objektdex-icon.png" />
+  <meta name="theme-color" content="#0A1615" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F1F6F4" media="(prefers-color-scheme: light)" />
+  <style>
+    @font-face { font-family: 'Inter'; src: url('../assets/inter-latin-var.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+    :root {
+      --bg: #F1F6F4; --surface: #FFFFFF; --soft: #F6FAF8; --ink: #0E2421; --muted: #55706A; --border: #D6E4DF;
+      --accent: #0B8A68; --accent-soft: #DBF3EA; --green: #047857; --green-soft: #D1FAE5;
+      --amber: #C2410C; --amber-soft: #FFEDD5; --red: #DC2626; --red-soft: #FEE2E2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0A1615; --surface: #112321; --soft: #172E2B; --ink: #E7F3EF; --muted: #93AEA8; --border: #21403B;
+        --accent: #34D8A6; --accent-soft: #0F3A30; --green: #34D399; --green-soft: #0F3326;
+        --amber: #FB923C; --amber-soft: #3B200C; --red: #F87171; --red-soft: #3B1618;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; -webkit-text-size-adjust: 100%; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 20px 16px calc(40px + env(safe-area-inset-bottom)); }
+    header.top { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    header.top .brand { width: 40px; height: 40px; border-radius: 12px; flex: none; }
+    header.top .org { font-weight: 800; font-size: 15px; }
+    header.top .kind { color: var(--muted); font-size: 13px; }
+    h1 { font-size: clamp(24px, 6vw, 32px); line-height: 1.15; margin: 4px 0 4px; letter-spacing: -0.01em; }
+    .addr { color: var(--muted); margin: 0 0 18px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 16px 18px; margin-bottom: 14px; }
+    h2 { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 26px 2px 10px; font-weight: 800; }
+    .seg { display: inline-flex; gap: 4px; background: var(--soft); border: 1px solid var(--border); border-radius: 999px; padding: 4px; margin: 0 0 12px; }
+    .seg button { border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 700; font-size: 14px; padding: 7px 14px; border-radius: 999px; cursor: pointer; }
+    .seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+    .si { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; padding: 10px 0; border-top: 1px solid var(--border); }
+    .si:first-child { border-top: 0; }
+    .si .n { font-weight: 700; } .si .c { color: var(--muted); font-size: 13px; grid-column: 1; }
+    .pill { grid-row: 1 / span 2; grid-column: 2; font-weight: 800; font-size: 14px; padding: 5px 11px; border-radius: 999px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .ok { background: var(--green-soft); color: var(--green); } .open { background: var(--amber-soft); color: var(--amber); } .neutral { background: var(--soft); color: var(--muted); }
+    .day { font-weight: 800; margin: 18px 2px 8px; font-size: 15px; }
+    .op { display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--border); }
+    .op:first-of-type { border-top: 0; }
+    .op .t { font-weight: 800; font-variant-numeric: tabular-nums; }
+    .op .s { font-weight: 700; }
+    .op .m { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 2px; }
+    .op .note { font-size: 14px; margin-top: 4px; }
+    .op.canceled .s, .op.canceled .t { text-decoration: line-through; color: var(--muted); }
+    .tag { display: inline-block; font-size: 12px; font-weight: 800; padding: 2px 8px; border-radius: 999px; }
+    .tag.red { background: var(--red-soft); color: var(--red); }
+    .def { padding: 12px 0; border-top: 1px solid var(--border); }
+    .def:first-child { border-top: 0; }
+    .def .x { font-weight: 700; } .def .m { color: var(--muted); font-size: 14px; }
+    .photos { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .photos img { width: 84px; height: 84px; object-fit: cover; border-radius: 10px; background: var(--soft); cursor: zoom-in; }
+    details summary { cursor: pointer; font-weight: 700; color: var(--accent); padding: 6px 2px; }
+    .empty { color: var(--muted); padding: 6px 0; }
+    .state { text-align: center; padding: 60px 16px; }
+    .state h1 { font-size: 24px; } .state p { color: var(--muted); max-width: 460px; margin: 8px auto; }
+    .foot { color: var(--muted); font-size: 13px; text-align: center; margin-top: 30px; line-height: 1.6; }
+    .foot a { color: var(--accent); }
+    .more { display: block; width: 100%; margin-top: 8px; border: 1px solid var(--border); background: var(--soft); color: var(--ink); font: inherit; font-weight: 700; padding: 12px; border-radius: 12px; cursor: pointer; }
+    .demo { background: var(--amber-soft); color: var(--amber); border-radius: 12px; padding: 10px 14px; font-size: 14px; font-weight: 600; margin-bottom: 14px; }
+    dialog { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 92vh; }
+    dialog::backdrop { background: rgba(0,0,0,.85); }
+    dialog img { max-width: 96vw; max-height: 88vh; border-radius: 10px; display: block; }
+    .skel { height: 18px; border-radius: 8px; background: var(--soft); margin: 10px 0; animation: pulse 1.2s infinite ease-in-out; }
+    @keyframes pulse { 50% { opacity: .5; } }
+    @media (prefers-reduced-motion: reduce) { .skel { animation: none; } }
+  </style>
+</head>
+<body>
+  <main class="wrap" id="app" aria-live="polite">
+    <div class="skel" style="width:40%"></div><div class="skel" style="width:70%;height:30px"></div><div class="skel"></div><div class="skel"></div>
+  </main>
+  <dialog id="zoom"><img alt="Foto groß" /></dialog>
+
+  <script>
+  // ObjektDex — Auftraggeber-Ansicht (Lese-Link). Liest per Supabase-RPC share_link_view(p_token) — ohne Konto.
+  // Vertrag: ObjektDex/SCHEMA.md. Personen nur „Vorname + Anfangsbuchstabe“, keine Koordinaten (liefert der Server so).
+  // Beim Veröffentlichen die beiden Platzhalter ersetzen (anon-Key ist öffentlich, RLS/RPC schützen die Daten).
+  // Fotos: privat; erst mit PHOTO_FN (Edge Function, signiert nach share_link_photo_allowed) sichtbar, sonst nur die Anzahl.
+  const SUPABASE_URL = '__OBJEKTDEX_SUPABASE_URL__';   // z. B. https://<ref>.supabase.co
+  const SUPABASE_ANON = '__OBJEKTDEX_SUPABASE_ANON__';
+  const PHOTO_FN = '';                                  // z. B. https://<ref>.supabase.co/functions/v1/nachweis-fotos
+
+  const $app = document.getElementById('app');
+  const token = decodeURIComponent((location.hash || '').replace(/^#/, '').trim());
+  const configured = !SUPABASE_URL.startsWith('__');
+  const TZ = 'Europe/Berlin';
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const fmtDay = (iso) => new Intl.DateTimeFormat('de-DE', { timeZone: TZ, weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(iso));
+  const fmtTime = (iso) => new Intl.DateTimeFormat('de-DE', { timeZone: TZ, hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
+  const fmtDate = (d) => { const [y, m, t] = String(d).slice(0, 10).split('-'); return `${t}.${m}.${y}`; };
+  const dayKey = (iso) => new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(iso));
+  const monthName = (d) => new Intl.DateTimeFormat('de-DE', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(String(d).slice(0, 10) + 'T12:00:00Z'));
+  const CAD = { daily: 'Täglich', weekly: 'Wöchentlich', biweekly: 'Alle 14 Tage', monthly: 'Monatlich', on_demand: 'Nach Bedarf' };
+
+  function sollIst(r) {
+    if (r.soll == null) return { text: `${r.ist}× nach Bedarf`, cls: 'neutral' };
+    if (r.soll === 0) return { text: r.ist ? `${r.ist}× (noch nicht fällig)` : 'noch nicht fällig', cls: 'neutral' };
+    return { text: `${r.ist} von ${r.soll}`, cls: r.ist >= r.soll ? 'ok' : 'open' };
+  }
+
+  function state(title, text) {
+    $app.innerHTML = `<div class="state"><h1>${esc(title)}</h1><p>${esc(text)}</p></div>` + foot();
+  }
+  function foot() {
+    return `<p class="foot">Leistungsnachweis erstellt mit <a href="https://objektdex.dexware.app/" rel="noopener">ObjektDex</a> · ein Produkt von Dexware.<br>
+      Einsätze werden beim Eingang mit Serverzeit und Prüfcode versiegelt und lassen sich nicht nachträglich ändern.</p>`;
+  }
+
+  async function load() {
+    if (!token && configured) return state('Kein Link', 'Bitte den vollständigen Link aus der Nachricht öffnen.');
+    if (!configured || token === 'demo') return render(DEMO, true);
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/share_link_view`, {
+        method: 'POST',
+        headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_token: token }),
+        referrerPolicy: 'no-referrer',
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const v = await res.json();
+      if (!v || v.ok !== true) {
+        if (v && v.reason === 'revoked') return state('Link nicht mehr gültig', 'Dieser Link wurde vom Dienstleister widerrufen. Bitte frag dort nach einem neuen Link.');
+        return state('Link unbekannt', 'Diesen Link gibt es nicht. Bitte prüfe, ob er vollständig kopiert wurde.');
+      }
+      render(v, false);
+    } catch (e) {
+      state('Gerade nicht erreichbar', 'Die Daten konnten nicht geladen werden. Bitte später noch einmal versuchen.');
+    }
+  }
+
+  async function signed(paths) {
+    if (!PHOTO_FN || !paths.length) return {};
+    try {
+      const res = await fetch(PHOTO_FN, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }, body: JSON.stringify({ token, paths }) });
+      return res.ok ? await res.json() : {};
+    } catch { return {}; }
+  }
+
+  let siTab = 'month';
+  let shown = 30;
+  async function render(v, demo) {
+    document.title = `${v.property?.name ?? 'Objekt'} · Leistungsnachweis`;
+    const ops = v.operations || [];
+    const defects = v.defects || [];
+    const openDef = defects.filter((d) => d.status === 'open');
+    const doneDef = defects.filter((d) => d.status !== 'open');
+    const allPaths = [...ops.flatMap((o) => o.photos || []), ...defects.flatMap((d) => d.photos || [])]
+      .filter((p) => typeof p === 'string' && p.startsWith('storage:')).map((p) => p.slice(8));
+    const urls = demo ? {} : await signed([...new Set(allPaths)].slice(0, 200));
+    const photos = (list) => {
+      const arr = (list || []).filter((p) => typeof p === 'string');
+      const imgs = arr.map((p) => urls[p.replace(/^storage:/, '')]).filter((u) => typeof u === 'string' && /^https:\/\//.test(u));
+      if (imgs.length) return `<div class="photos">${imgs.map((u) => `<img src="${esc(u)}" alt="Foto" loading="lazy" />`).join('')}</div>`;
+      return arr.length ? `<span>📷 ${arr.length} ${arr.length === 1 ? 'Foto' : 'Fotos'}</span>` : '';
+    };
+
+    const si = v.soll_ist || {};
+    const rows = (siTab === 'month' ? si.month : si.prev) || [];
+    const siLabel = (from) => from ? monthName(from) : '';
+    const siHtml = rows.length
+      ? rows.map((r) => { const x = sollIst(r); return `<div class="si"><span class="n">${esc(r.name)}</span><span class="pill ${x.cls}">${esc(x.text)}</span><span class="c">${esc(CAD[r.cadence] || '')}</span></div>`; }).join('')
+      : '<p class="empty">Keine Leistungen in diesem Zeitraum.</p>';
+
+    // Einsätze nach Berliner Tag
+    const groups = [];
+    for (const o of ops.slice(0, shown)) {
+      const k = dayKey(o.started_at);
+      let g = groups[groups.length - 1];
+      if (!g || g.k !== k) groups.push((g = { k, label: fmtDay(o.started_at), items: [] }));
+      g.items.push(o);
+    }
+    const opHtml = groups.length ? groups.map((g) => `<div class="day">${esc(g.label)}</div><div class="card">${g.items.map((o) => `
+      <div class="op ${o.canceled ? 'canceled' : ''}">
+        <div class="t">${esc(fmtTime(o.started_at))}</div>
+        <div>
+          <div class="s">${esc((o.services || []).join(' · ') || 'Kontrolle vor Ort')}</div>
+          <div class="m">
+            ${o.by ? `<span>${esc(o.by)}</span>` : ''}
+            ${o.gps ? `<span>✓ vor Ort${o.distance_m != null ? ` (${Math.round(o.distance_m)} m vom Objekt)` : ''}</span>` : ''}
+            ${o.ended_at ? `<span>bis ${esc(fmtTime(o.ended_at))}</span>` : ''}
+            ${photos(o.photos)}
+            ${o.canceled ? `<span class="tag red">storniert${o.cancel_reason ? ': ' + esc(o.cancel_reason) : ''}</span>` : ''}
+          </div>
+          ${o.notes ? `<div class="note">${esc(o.notes)}</div>` : ''}
+        </div>
+      </div>`).join('')}</div>`).join('') : '<div class="card"><p class="empty">Im Zeitraum noch keine Einsätze.</p></div>';
+
+    const defHtml = (list) => list.map((d) => `
+      <div class="def">
+        <div class="x">${esc(d.text)}</div>
+        <div class="m">gemeldet ${esc(fmtDate(dayKey(d.created_at)))}${d.by ? ' · ' + esc(d.by) : ''}${d.status !== 'open' && d.resolved_at ? ` · erledigt ${esc(fmtDate(dayKey(d.resolved_at)))}${d.resolved_note ? ': ' + esc(d.resolved_note) : ''}` : ''}</div>
+        ${photos(d.photos)}
+      </div>`).join('');
+
+    $app.innerHTML = `
+      ${demo ? '<div class="demo">Beispiel-Ansicht mit erfundenen Daten — so sieht die Hausverwaltung den Link.</div>' : ''}
+      <header class="top">
+        <img class="brand" src="/objektdex-icon.png" alt="" onerror="this.style.display='none'" />
+        <div><div class="org">${esc(v.org?.name || '')}</div><div class="kind">Leistungsnachweis · nur lesen</div></div>
+      </header>
+      <h1>${esc(v.property?.name || 'Objekt')}</h1>
+      <p class="addr">${esc(v.property?.address || '')}</p>
+
+      <h2>Soll / Ist</h2>
+      <div class="seg" role="group" aria-label="Zeitraum">
+        <button type="button" data-si="month" aria-pressed="${siTab === 'month'}">${esc(siLabel(si.month_from) || 'Dieser Monat')}</button>
+        <button type="button" data-si="prev" aria-pressed="${siTab === 'prev'}">${esc(siLabel(si.prev_from) || 'Vormonat')}</button>
+      </div>
+      <div class="card">${siHtml}</div>
+
+      <h2>Offene Mängel (${openDef.length})</h2>
+      <div class="card">${openDef.length ? defHtml(openDef) : '<p class="empty">Keine offenen Mängel.</p>'}</div>
+      ${doneDef.length ? `<details><summary>Erledigte Mängel (${doneDef.length})</summary><div class="card">${defHtml(doneDef)}</div></details>` : ''}
+
+      <h2>Letzte Einsätze</h2>
+      ${opHtml}
+      ${ops.length > shown ? `<button class="more" type="button" id="more">Ältere Einsätze zeigen (${ops.length - shown})</button>` : ''}
+      ${foot()}`;
+    $app.querySelectorAll('[data-si]').forEach((b) => b.addEventListener('click', () => { siTab = b.dataset.si; render(v, demo); }));
+    const more = document.getElementById('more');
+    if (more) more.addEventListener('click', () => { shown += 30; render(v, demo); });
+    const dlg = document.getElementById('zoom');
+    $app.querySelectorAll('.photos img').forEach((img) => img.addEventListener('click', () => { dlg.querySelector('img').src = img.src; dlg.showModal(); }));
+    dlg.onclick = () => dlg.close();
+  }
+
+  // Beispiel (#demo bzw. solange der Server-Platzhalter steht) — gleiche Form wie share_link_view
+  const iso = (daysAgo, h, m) => { const d = new Date(); d.setDate(d.getDate() - daysAgo); d.setHours(h, m, 0, 0); return d.toISOString(); };
+  // Monatserster als JJJJ-MM-01 aus der Ortszeit (nie über toISOString — das wäre der UTC-Tag)
+  const first = (offset) => { const d = new Date(); const m = new Date(d.getFullYear(), d.getMonth() + offset, 1); return `${m.getFullYear()}-${String(m.getMonth() + 1).padStart(2, '0')}-01`; };
+  const DEMO = {
+    ok: true,
+    org: { name: 'Objektservice Brandl', brand_color: '#0B8A68' },
+    property: { name: 'WEG Lindenstraße 12', address: 'Lindenstraße 12, 80331 München', active: true },
+    soll_ist: {
+      month_from: first(0), prev_from: first(-1),
+      month: [
+        { name: 'Treppenhausreinigung', cadence: 'weekly', soll: 3, ist: 3 },
+        { name: 'Mülltonnen raus/rein', cadence: 'weekly', soll: 2, ist: 2 },
+        { name: 'Kontrollgang', cadence: 'weekly', soll: 2, ist: 1 },
+        { name: 'Zählerstände', cadence: 'monthly', soll: 0, ist: 0 },
+      ],
+      prev: [
+        { name: 'Treppenhausreinigung', cadence: 'weekly', soll: 9, ist: 9 },
+        { name: 'Mülltonnen raus/rein', cadence: 'weekly', soll: 4, ist: 4 },
+        { name: 'Kontrollgang', cadence: 'weekly', soll: 5, ist: 5 },
+        { name: 'Zählerstände', cadence: 'monthly', soll: 1, ist: 1 },
+      ],
+    },
+    operations: [
+      { started_at: iso(1, 7, 10), ended_at: iso(1, 7, 35), services: ['Mülltonnen raus/rein'], by: 'Tom B.', gps: true, distance_m: 11, photos: ['storage:x/1.jpg'], notes: 'Tonnen wieder reingestellt, Deckel geschlossen.', canceled: false },
+      { started_at: iso(2, 7, 10), ended_at: iso(2, 7, 42), services: ['Treppenhausreinigung'], by: 'Lena K.', gps: true, distance_m: 9, photos: [], notes: 'Treppenhaus nass gewischt, Fenster Podest 2. OG gereinigt.', canceled: false },
+      { started_at: iso(5, 7, 12), ended_at: iso(5, 7, 30), services: ['Kontrollgang'], by: 'Tom B.', gps: true, distance_m: 14, photos: ['storage:x/2.jpg', 'storage:x/3.jpg'], notes: '', canceled: false },
+      { started_at: iso(6, 7, 10), ended_at: iso(6, 7, 40), services: ['Treppenhausreinigung'], by: 'Lena K.', gps: true, distance_m: 8, photos: [], notes: '', canceled: false },
+      { started_at: iso(8, 7, 15), ended_at: iso(8, 7, 25), services: ['Mülltonnen raus/rein'], by: 'Tom B.', gps: false, distance_m: null, photos: [], notes: '', canceled: true, cancel_reason: 'Falsches Objekt gewählt' },
+    ],
+    defects: [
+      { created_at: iso(2, 8, 40), text: 'Haustür schließt nicht richtig — Türschließer zu schwach eingestellt.', status: 'open', by: 'Lena K.', photos: ['storage:x/4.jpg'] },
+      { created_at: iso(20, 8, 40), text: 'Wasserfleck an der Decke im Treppenhaus 2. OG.', status: 'done', resolved_at: iso(17, 10, 5), resolved_note: 'Hausverwaltung informiert, Dachdecker war da.', by: 'Tom B.', photos: [] },
+    ],
+  };
+
+  load();
+  window.addEventListener('hashchange', () => location.reload());
+  </script>
+</body>
+</html>

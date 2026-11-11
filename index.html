@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ObjektDex – Leistungsnachweis für Hausbetreuung, Reinigung & Grünpflege</title>
+  <meta name="description" content="ObjektDex: Hausbetreuung, Reinigung und Grünpflege belegen — jeder Einsatz mit Zeit, Ort und Fotos, Leistungen mit Turnus, PDF mit Soll/Ist und Lese-Link für die Hausverwaltung. Gratis für 2 Objekte." />
+  <meta name="theme-color" content="#0A1615" />
+  <!-- seo:start -->
+  <link rel="icon" type="image/png" href="/objektdex-icon.png" />
+  <link rel="canonical" href="https://objektdex.dexware.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ObjektDex" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:title" content="ObjektDex – Leistungsnachweis für Hausbetreuung" />
+  <meta property="og:description" content="Jeder Einsatz mit Zeit, Ort und Fotos — Soll/Ist je Leistung als PDF und als Lese-Link für die Hausverwaltung." />
+  <meta property="og:url" content="https://objektdex.dexware.app/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="ObjektDex – Leistungsnachweis für Hausbetreuung" />
+  <meta name="twitter:description" content="Jeder Einsatz mit Zeit, Ort und Fotos — Soll/Ist je Leistung als PDF und als Lese-Link für die Hausverwaltung." />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ObjektDex","url":"https://objektdex.dexware.app/","description":"Leistungsnachweis für Hausbetreuung, Reinigung und Grünpflege: Einsätze mit Zeit, Ort und Fotos, Leistungen mit Turnus, Soll/Ist als PDF.","applicationCategory":"BusinessApplication","operatingSystem":"Android","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"Dexware","url":"https://dexware.app/"}}</script>
+  <!-- seo:end -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Wird mein Team geortet?","acceptedAnswer":{"@type":"Answer","text":"Nein, es gibt keine Dauer-Ortung. Der Standort wird nur in dem Moment erfasst, in dem jemand einen Einsatz dokumentiert — und nur, wenn er das erlaubt. Ohne Erlaubnis funktioniert alles, nur ohne GPS-Stempel. Einzige Ausnahme: eine Runde, die man selbst startet, zeichnet den Weg bis „Runde beenden“ auf."}},{"@type":"Question","name":"Kann man einen Einsatz nachträglich ändern?","acceptedAnswer":{"@type":"Answer","text":"Nein. Gespeicherte Einsätze bleiben, wie sie sind, und bekommen beim Eingang die Serverzeit und einen Prüfcode. Ein Fehler wird als Storno mit Begründung durch den Inhaber vermerkt — der Eintrag bleibt sichtbar."}},{"@type":"Question","name":"Was sieht die Hausverwaltung über den Link?","acceptedAnswer":{"@type":"Answer","text":"Die Einsätze der letzten Wochen mit Leistungen, Uhrzeit und Fotos, das Soll/Ist des Monats und die Mängel. Personen nur mit Vorname und Anfangsbuchstabe, keine Koordinaten. Du kannst jeden Link jederzeit widerrufen."}},{"@type":"Question","name":"Was passiert im Funkloch?","acceptedAnswer":{"@type":"Answer","text":"Die App speichert den Einsatz samt Fotos auf dem Handy und schickt ihn nach, sobald wieder Netz da ist — mit der Uhrzeit, zu der er wirklich dokumentiert wurde."}},{"@type":"Question","name":"Und im Winter?","acceptedAnswer":{"@type":"Answer","text":"Für den Winterdienst gibt es WinterDex — mit dem gleichen Bedienkonzept. Mit dem Dexware-Suite-Abo ist Pro in beiden enthalten."}},{"@type":"Question","name":"Ist das eine Zeiterfassung?","acceptedAnswer":{"@type":"Answer","text":"Nein. ObjektDex belegt Leistungen am Objekt. Für Lohnabrechnung, Angebote oder Rechnungen ist es nicht gedacht."}}]}</script>
+  <link rel="preload" href="assets/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face { font-family: 'Inter'; src: url('assets/inter-latin-var.woff2') format('woff2');
+      font-weight: 100 900; font-style: normal; font-display: swap; }
+    :root {
+      --accent: #34D8A6;
+      --on-accent: #04261D;
+      --radius: 16px;
+      --wrap: 1120px;
+    }
+    html.light {
+      --bg: #ffffff;
+      --bg-soft: color-mix(in oklab, #f7f7f9 96%, var(--accent));
+      --surface: #ffffff;
+      --border: color-mix(in oklab, #e7e7eb 94%, var(--accent));
+      --ink: #0d0d12;
+      --muted: #5c5c69;
+      --accent-text: color-mix(in oklab, var(--accent) 82%, #000);
+      --accent-soft: color-mix(in oklab, var(--accent) 10%, #fff);
+      --card: var(--surface);
+      --shadow: 0 1px 2px rgba(16,16,24,.04), 0 8px 24px -12px rgba(16,16,24,.12);
+      color-scheme: light;
+    }
+    html.dark {
+      --bg: #0A1615;
+      --bg-soft: color-mix(in oklab, #0A1615 96%, #fff);
+      --surface: color-mix(in oklab, #0A1615 93%, #fff);
+      --card: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      --border: rgba(255,255,255,.085);
+      --ink: #f6f5f7;
+      --muted: #aaa4ad;
+      --accent-text: color-mix(in oklab, var(--accent) 70%, #fff);
+      --accent-soft: color-mix(in oklab, var(--accent) 18%, transparent);
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px -16px rgba(0,0,0,.6);
+      color-scheme: dark;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+    body { background: var(--bg); color: var(--ink);
+      font: 400 16px/1.6 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-feature-settings: 'cv11', 'ss01'; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: var(--accent-text); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+    img { max-width: 100%; }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+    @media (max-width: 600px) { .wrap { padding: 0 16px; } }
+    .i { width: 20px; height: 20px; flex: none; }
+
+    /* Kopfzeile */
+    .top { position: sticky; top: 0; z-index: 40; background: color-mix(in oklab, var(--bg) 82%, transparent);
+      -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
+      border-bottom: 1px solid transparent; transition: border-color .2s; }
+    .top.scrolled { border-bottom-color: var(--border); }
+    .top .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 650; font-size: 17px; letter-spacing: -.01em; }
+    .brand:hover { text-decoration: none; }
+    /* Feiner heller Rand wie auf dem Hub: dunkle Symbole (TourDex, GurtDex, HebeDex, KfzDex) verschwinden sonst im dunklen Hintergrund. */
+    .brand img { width: 32px; height: 32px; border-radius: 8px; box-shadow: 0 0 0 1px rgba(255,255,255,.16); }
+    .brand .wm span { color: var(--accent-text); }
+    .top nav { display: flex; gap: 24px; margin-left: auto; }
+    .top nav a { color: var(--muted); font-size: 14.5px; font-weight: 500; }
+    .top nav a:hover { color: var(--ink); text-decoration: none; }
+    @media (max-width: 760px) { .top nav { display: none; } .top .btn { margin-left: auto; } }
+
+    /* Knöpfe */
+    .btn { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 22px; border-radius: 12px;
+      font-weight: 600; font-size: 15.5px; background: var(--accent); color: var(--on-accent);
+      box-shadow: 0 1px 0 rgba(255,255,255,.18) inset, 0 6px 20px -8px color-mix(in oklab, var(--accent) 70%, transparent);
+      transition: transform .15s, box-shadow .15s, background .15s; }
+    .btn:hover { text-decoration: none; transform: translateY(-1px);
+      box-shadow: 0 1px 0 rgba(255,255,255,.18) inset, 0 10px 26px -8px color-mix(in oklab, var(--accent) 80%, transparent); }
+    .btn.sm { height: 38px; padding: 0 16px; font-size: 14px; border-radius: 10px; }
+    .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--border); }
+    .btn.ghost:hover { background: var(--bg-soft); }
+    .btn .play { width: 14px; height: 14px; fill: currentColor; stroke: none; }
+    .btn .i { width: 16px; height: 16px; }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: -20% -10% auto 40%; height: 120%; z-index: -1; pointer-events: none;
+      background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 22%, transparent), transparent 75%); }
+    .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; padding-top: 56px; padding-bottom: 40px; }
+    .kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--accent-text);
+      background: var(--accent-soft); padding: 6px 12px; border-radius: 999px; margin-bottom: 22px; }
+    h1 { font-size: clamp(34px, 4.6vw, 54px); line-height: 1.05; font-weight: 750; letter-spacing: -.035em; }
+    h1 em { font-style: normal; color: var(--accent-text); }
+    .sub { margin-top: 20px; font-size: 18px; line-height: 1.6; color: var(--muted); max-width: 520px; }
+    .sub strong { color: var(--ink); font-weight: 600; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .hint { margin-top: 12px; font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .hint .i { width: 15px; height: 15px; }
+    .ticks { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .ticks li { list-style: none; display: flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 500; }
+    .ticks .i { width: 17px; height: 17px; color: var(--accent-text); }
+    .shots { position: relative; height: 560px; }
+    .shots .phone { position: absolute; }
+    .shots .phone.a { left: 4%; top: 0; z-index: 2; }
+    .shots .phone.b { right: 0; top: 64px; transform: scale(.9); transform-origin: top right; opacity: .96; }
+    @media (max-width: 900px) {
+      .hero .wrap { grid-template-columns: 1fr; gap: 36px; padding-top: 36px; }
+      .shots { height: 380px; max-width: 420px; width: 100%; margin: 0 auto;
+        -webkit-mask-image: linear-gradient(#000 70%, transparent); mask-image: linear-gradient(#000 70%, transparent); }
+      .shots .phone { --pw: 210px; }
+      .shots .phone.a { left: 2%; } .shots .phone.b { top: 40px; }
+    }
+
+    /* Handyrahmen */
+    .phone { --pw: 262px; width: var(--pw); padding: 8px; border-radius: calc(var(--pw) * .16);
+      background: linear-gradient(160deg, #2b2b31, #0e0e11 40%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset, 0 0 0 1px rgba(0,0,0,.5), 0 40px 70px -30px rgba(10,10,20,.55), 0 18px 30px -18px rgba(10,10,20,.35); }
+    .screen { position: relative; border-radius: calc(var(--pw) * .13); overflow: hidden; background: var(--bar); padding-top: calc(var(--pw) * .1); }
+    .screen::before { content: ''; position: absolute; top: calc(var(--pw) * .03); left: 50%; transform: translateX(-50%);
+      width: 30%; height: calc(var(--pw) * .075); border-radius: 99px; background: #000; }
+    .screen img { display: block; width: 100%; height: auto; }
+
+    /* Abschnitte */
+    section { padding: 80px 0; }
+    section.soft { background: var(--bg-soft); }
+    @media (max-width: 700px) {
+      section { padding: 52px 0; }
+      .head { margin-bottom: 24px; }
+      .lead { font-size: 16px; }
+      .sub { font-size: 16.5px; }
+      .cta .btn { flex: 1 1 100%; justify-content: center; }
+      .ticks { gap: 8px 16px; }
+      .rules li { padding: 14px 16px; grid-template-columns: 32px 1fr; gap: 12px; font-size: 14.5px; }
+      .rules .ic { width: 32px; height: 32px; }
+    }
+    .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: var(--accent-text); margin-bottom: 10px; }
+    h2 { font-size: clamp(27px, 3.4vw, 38px); line-height: 1.12; font-weight: 720; letter-spacing: -.03em; max-width: 760px; }
+    .lead { margin-top: 14px; font-size: 17px; color: var(--muted); max-width: 620px; }
+    .lead strong { color: var(--ink); font-weight: 600; }
+    .head { margin-bottom: 40px; }
+
+    /* Pflicht */
+    .duty { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: start; }
+    .rules { list-style: none; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .rules li { display: grid; grid-template-columns: 36px 1fr; gap: 14px; padding: 18px 22px; border-top: 1px solid var(--border); font-size: 15px; color: var(--muted); }
+    .rules li:first-child { border-top: 0; }
+    .rules b { display: block; color: var(--ink); font-weight: 600; font-size: 15.5px; margin-bottom: 1px; }
+    .ic { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-text); }
+    @media (max-width: 860px) { .duty { grid-template-columns: 1fr; gap: 28px; } }
+
+    /* Funktionen */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .feature .ic { margin-bottom: 16px; }
+    .feature h3 { font-size: 16.5px; font-weight: 640; letter-spacing: -.01em; margin-bottom: 6px; }
+    .feature p { font-size: 15px; color: var(--muted); line-height: 1.55; }
+    @media (max-width: 900px) { .features { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .features { grid-template-columns: 1fr; gap: 10px; }
+      .feature { padding: 16px; display: grid; grid-template-columns: 36px 1fr; gap: 0 14px; }
+      .feature .ic { margin: 0; grid-row: span 2; } .feature p { font-size: 14.5px; } }
+
+    /* Ablauf */
+    .flow { display: grid; grid-template-columns: 1fr auto; gap: 72px; align-items: center; }
+    .steps { list-style: none; counter-reset: s; margin-top: 32px; }
+    .steps li { counter-increment: s; position: relative; padding: 0 0 26px 56px; }
+    .steps li:last-child { padding-bottom: 0; }
+    .steps li::before { content: counter(s); position: absolute; left: 0; top: -2px; width: 36px; height: 36px; border-radius: 50%;
+      display: grid; place-items: center; font-weight: 650; font-size: 15px; background: var(--accent); color: var(--on-accent); }
+    .steps li:not(:last-child)::after { content: ''; position: absolute; left: 17.5px; top: 40px; bottom: 6px; width: 1px; background: var(--border); }
+    .steps b { display: block; font-size: 17px; font-weight: 640; margin-bottom: 4px; }
+    .steps p { color: var(--muted); font-size: 15.5px; }
+    .flow .phone { --pw: 280px; }
+    @media (max-width: 860px) { .flow { grid-template-columns: 1fr; } .flow > div:last-child { display: none; } .steps { margin-top: 24px; } }
+
+    /* Preise */
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+    .plan { position: relative; display: flex; flex-direction: column; min-width: 0; background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+    .plan.pro { border-color: color-mix(in oklab, var(--accent) 55%, var(--border)); box-shadow: 0 0 0 1px color-mix(in oklab, var(--accent) 55%, transparent), var(--shadow); }
+    .plan .badge { position: absolute; top: -11px; left: 28px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 99px; background: var(--accent); color: var(--on-accent); }
+    .plan h3 { font-size: 15px; font-weight: 600; color: var(--muted); }
+    .price { margin-top: 10px; font-size: 38px; font-weight: 720; letter-spacing: -.03em; line-height: 1.1; }
+    .price small { font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+    .per { font-size: 14px; color: var(--muted); margin-top: 4px; min-height: 22px; }
+    .plan ul { list-style: none; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--border); display: grid; gap: 10px; }
+    .plan li { display: flex; gap: 10px; font-size: 15px; }
+    .plan li .i { width: 18px; height: 18px; margin-top: 2px; color: var(--accent-text); }
+    .plan.suite { color: #f4f4f6; border: 1px solid transparent;
+      background: linear-gradient(180deg, #121218, #0b0b0f) padding-box, linear-gradient(140deg, #3b82f6, #8b5cf6 55%, var(--accent)) border-box; }
+    .plan.suite h3, .plan.suite .per, .plan.suite .price small { color: #a3a3ad; }
+    .plan.suite ul { border-color: rgba(255,255,255,.1); }
+    .plan.suite li .i { color: #f4f4f6; }
+    .icons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 22px; }
+    .icons img { width: 26px; height: 26px; border-radius: 7px; }
+    .fine { margin-top: 20px; font-size: 13.5px; color: var(--muted); }
+    .trust { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px 26px; font-size: 14px; color: var(--muted); }
+    .trust li { display: flex; align-items: center; gap: 8px; }
+    .trust .i { width: 18px; height: 18px; flex: none; color: var(--accent-text); }
+    .trust a { color: inherit; }
+    @media (max-width: 960px) { .plans { grid-template-columns: 1fr; max-width: 480px; } }
+
+    /* FAQ */
+    .faq { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: start; }
+    .faq details { border-bottom: 1px solid var(--border); }
+    .faq details:first-child { border-top: 1px solid var(--border); }
+    .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 16px; align-items: center;
+      padding: 18px 2px; font-weight: 600; font-size: 16px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary .i { color: var(--muted); transition: transform .2s; }
+    .faq details[open] summary .i { transform: rotate(180deg); }
+    .faq .a { padding: 0 2px 20px; color: var(--muted); font-size: 15.5px; max-width: 640px; }
+    .ask { margin-top: 18px; color: var(--muted); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+    @media (max-width: 860px) { .faq { grid-template-columns: 1fr; gap: 24px; } }
+
+    /* Familie */
+    .family { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin-top: 32px; }
+    .family a { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 6px 14px; border-radius: 14px;
+      color: var(--ink); text-align: center; transition: background .15s; }
+    .family a:hover { background: var(--surface); text-decoration: none; box-shadow: var(--shadow); }
+    .family a[aria-disabled] { cursor: default; opacity: .75; } .family a[aria-disabled]:hover { background: none; box-shadow: none; }
+    .family img { width: 44px; height: 44px; border-radius: 11px; box-shadow: 0 0 0 1px rgba(255,255,255,.16); }
+    .family b { font-size: 13.5px; font-weight: 600; line-height: 1.2; }
+    .family small { font-size: 12px; color: var(--muted); line-height: 1.3; }
+    .family-row { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+    @media (max-width: 900px) { .family { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 480px) { .family { grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 20px; } .family a { padding: 10px 2px; gap: 6px; }
+      .family img { width: 40px; height: 40px; } .family b { font-size: 11.5px; } .family small { display: none; } }
+
+    /* Prüfpunkte (optional) */
+    .points { margin-top: 16px; padding: 22px 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); }
+    .points p { font-size: 15px; color: var(--muted); margin-bottom: 14px; }
+    .points p b { color: var(--ink); font-weight: 600; margin-right: 4px; }
+    .points ol { list-style: none; counter-reset: p; display: flex; flex-wrap: wrap; gap: 8px; }
+    .points li { counter-increment: p; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500;
+      padding: 5px 12px 5px 5px; border-radius: 99px; background: var(--bg-soft); border: 1px solid var(--border); }
+    .points li::before { content: counter(p); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+      font-size: 12px; font-weight: 650; background: var(--accent-soft); color: var(--accent-text); }
+    .points.plain li { padding: 5px 12px; }
+    .points.plain li::before { display: none; }
+    @media (max-width: 600px) { .points { padding: 16px; } .points li { font-size: 13px; } }
+
+    /* Fußzeile */
+    footer { border-top: 1px solid var(--border); padding: 32px 0 40px; font-size: 14px; color: var(--muted); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; }
+    footer nav { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+    footer .note { display: block; font-size: 13px; line-height: 1.55; margin-bottom: 20px; max-width: var(--wrap); }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--ink); }
+
+    /* Handy: Feinschliff (muss nach den Grundregeln stehen) */
+    @media (max-width: 700px) {
+      .duty { gap: 22px; }
+      .plan { padding: 22px; }
+      .plan ul { margin-top: 16px; padding-top: 14px; gap: 7px; }
+      .price { font-size: 34px; }
+      .plans { gap: 20px; }
+      .faq summary { padding: 15px 2px; font-size: 15.5px; }
+      .rules li { padding: 13px 16px; }
+      .family-row .btn { order: 2; }
+    }
+
+    /* Einblenden beim Scrollen — nur mit JS und ohne reduzierte Bewegung */
+    .js .rv { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+    .js .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .js .rv { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+    /* Look „objektdex“: motif=topo, soft=tint, edge=panel, cards=glass, steps=line, head=num, h2=normal, duty=grid, faq=lines, radius=18 (looks.js) */
+    :root { --radius: 18px; }
+    .btn { border-radius: 14px; }
+    .btn.sm { border-radius: 11px; }
+    .ic { border-radius: 11px; }
+    html.dark { --bg-soft: color-mix(in oklab, var(--bg) 88%, var(--accent)); }
+    section.soft { margin: 0 clamp(8px, 2vw, 28px); border-radius: clamp(22px, 3.4vw, 44px);
+      border: 1px solid color-mix(in oklab, var(--accent) 22%, transparent); }
+    section.soft + section.soft { margin-top: 16px; }
+    section.soft { position: relative; isolation: isolate; }
+    section.soft::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit;
+      background: var(--accent); opacity: 0.12;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='120' viewBox='0 0 240 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 20C40 4 80 36 120 20S200 4 240 20'/%3E%3Cpath d='M0 50C50 30 80 70 130 50S200 30 240 50'/%3E%3Cpath d='M0 82C30 66 90 100 140 80S210 70 240 82'/%3E%3Cpath d='M0 110C60 98 100 120 150 108S220 100 240 110'/%3E%3C/g%3E%3C/svg%3E"), linear-gradient(100deg, transparent 18%, #000 75%); -webkit-mask-size: 240px 120px, 100% 100%; -webkit-mask-repeat: repeat, no-repeat; -webkit-mask-composite: source-in;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='120' viewBox='0 0 240 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 20C40 4 80 36 120 20S200 4 240 20'/%3E%3Cpath d='M0 50C50 30 80 70 130 50S200 30 240 50'/%3E%3Cpath d='M0 82C30 66 90 100 140 80S210 70 240 82'/%3E%3Cpath d='M0 110C60 98 100 120 150 108S220 100 240 110'/%3E%3C/g%3E%3C/svg%3E"), linear-gradient(100deg, transparent 18%, #000 75%); mask-size: 240px 120px, 100% 100%; mask-repeat: repeat, no-repeat; mask-composite: intersect; }
+    @media (max-width: 700px) { section.soft::before { opacity: 0.084; } }
+    .feature { border: 1px solid transparent;
+      background: linear-gradient(165deg, color-mix(in oklab, var(--accent) 13%, var(--bg)), color-mix(in oklab, var(--bg) 96%, #fff) 60%) padding-box,
+        linear-gradient(165deg, color-mix(in oklab, var(--accent) 70%, transparent), rgba(255,255,255,.07) 45%, rgba(255,255,255,.02)) border-box; }
+    .feature .ic { border-radius: 50%; background: var(--accent); color: var(--on-accent);
+      box-shadow: 0 10px 26px -10px color-mix(in oklab, var(--accent) 80%, transparent); }
+    main { counter-reset: sec; }
+    main > section { counter-increment: sec; }
+    .eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; font-variant-numeric: tabular-nums; }
+    .eyebrow::before { content: counter(sec, decimal-leading-zero) '  /  '; white-space: pre; color: var(--muted); }
+    .duty { grid-template-columns: 1fr; gap: 32px; }
+    .duty > .rv:first-child { max-width: 760px; }
+    .duty .rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; background: none; border: 0; box-shadow: none; }
+    .duty .rules li, .duty .rules li:first-child { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
+    .duty .rules li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    @media (max-width: 760px) { .duty .rules { grid-template-columns: 1fr; } }
+
+    .show { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .show-points { margin-top: 24px; }
+    @media (max-width: 860px) { .show { grid-template-columns: 1fr; gap: 28px; } .show-visual { order: 2; } }
+    .odsi { max-width: 440px; margin: 0 auto; padding: 18px 20px; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 14px; }
+    .od-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .od-head span { color: var(--muted); font-size: 14px; }
+    .od-row { display: grid; grid-template-columns: 1fr 90px auto; gap: 12px; align-items: center; }
+    .od-name { display: flex; flex-direction: column; font-weight: 700; font-size: 15px; } .od-name small { color: var(--muted); font-weight: 500; font-size: 13px; }
+    .od-bar { height: 8px; border-radius: 99px; background: color-mix(in oklab, var(--border) 80%, transparent); overflow: hidden; }
+    .od-bar i { display: block; height: 100%; width: var(--w); border-radius: 99px; background: var(--accent); transform-origin: left; animation: odFill 6s infinite both; }
+    .od-row b { color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 14px; }
+    .od-row b.od-neutral { color: var(--muted); font-weight: 650; }
+    .od-row:nth-child(3) i { animation-delay: .25s; } .od-row:nth-child(4) i { animation-delay: .5s; }
+    @keyframes odFill { 0% { transform: scaleX(0); } 30%, 100% { transform: scaleX(1); } }
+    @media (max-width: 420px) { .od-row { grid-template-columns: 1fr auto; } .od-bar { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .od-bar i { animation: none !important; transform: none !important; } }
+
+    /* Handy-Wand + Lichter in der App-Farbe (Kopfbereich) */
+    .hero.walled { isolation: isolate; min-height: min(780px, 100svh); display: flex; align-items: center;
+      background:
+        radial-gradient(55% 70% at 80% 30%, color-mix(in oklab, var(--accent) 34%, transparent), transparent 70%),
+        radial-gradient(40% 55% at 100% 90%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 70%),
+        radial-gradient(45% 60% at 0% 0%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 70%),
+        var(--bg); }
+    .hero.walled::before { display: none; }
+    .hero.walled::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background: linear-gradient(90deg, var(--bg) 0%, color-mix(in oklab, var(--bg) 92%, transparent) 30%, color-mix(in oklab, var(--bg) 40%, transparent) 56%, transparent 78%),
+        linear-gradient(0deg, var(--bg) 0%, color-mix(in oklab, var(--bg) 60%, transparent) 12%, transparent 34%); }
+    .hero.walled > .wrap { position: relative; z-index: 1; width: 100%; }
+    .wall { position: absolute; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+    .wall-in { position: absolute; top: -38%; left: 26%; width: 115%; height: 190%; display: flex; gap: 26px;
+      transform: perspective(2200px) rotateX(14deg) rotateZ(-15deg); transform-origin: 50% 0; opacity: .5; }
+    .col { flex: none; width: 160px; }
+    .col:nth-child(even) { margin-top: -140px; }
+    .track { animation: wall-up var(--d) linear infinite; will-change: transform; }
+    .col:nth-child(even) .track { animation-name: wall-down; }
+    @keyframes wall-up { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -50%, 0); } }
+    @keyframes wall-down { from { transform: translate3d(0, -50%, 0); } to { transform: translate3d(0, 0, 0); } }
+    .wall.paused .track { animation-play-state: paused; }
+    @media (prefers-reduced-motion: reduce) { .track { animation: none; } }
+    .mp { position: relative; margin-bottom: 26px; padding: 5px; border-radius: 26px; background: linear-gradient(160deg, #343947, #0d1018 45%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.07) inset, 0 24px 40px -22px rgba(0,0,0,.9); }
+    .mp::before { content: ''; display: block; height: 14px; border-radius: 21px 21px 0 0; background: var(--bar); }
+    .mp::after { content: ''; position: absolute; top: 9px; left: 50%; width: 32%; height: 8px; transform: translateX(-50%); border-radius: 99px; background: #000; }
+    .mp img { display: block; width: 100%; height: auto; aspect-ratio: 150 / 290; object-fit: cover; object-position: top; border-radius: 0 0 21px 21px; }
+    /* Lichtschein hinter den beiden Handys */
+    .hero.walled .shots::before { content: ''; position: absolute; inset: 8% 4% 10%; border-radius: 50%; z-index: -1; filter: blur(48px);
+      background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 55%, transparent), color-mix(in oklab, var(--accent) 18%, transparent) 60%, transparent); }
+    @media (max-width: 900px) {
+      .hero.walled { min-height: 0; }
+      .hero.walled::after { background: linear-gradient(180deg, color-mix(in oklab, var(--bg) 92%, transparent) 0%, color-mix(in oklab, var(--bg) 74%, transparent) 50%, color-mix(in oklab, var(--bg) 55%, transparent) 75%, var(--bg) 100%); }
+      .wall-in { left: -30%; top: -20%; width: 170%; opacity: .42; }
+    }
+    @media (max-width: 480px) { .col { width: 128px; } .wall-in { gap: 18px; } }
+
+    /* Kopf „objektdex“: phones=cascade, wall=straight, speed=1.15, frame=tint (looks.js) */
+    .shots .phone.a { left: 0; top: 76px; }
+    .shots .phone.b { right: 2%; top: 0; transform: scale(.9); transform-origin: top right; opacity: .9; }
+    @media (max-width: 900px) { .shots .phone.a { top: 44px; } }
+    .wall-in { top: -12%; left: 46%; width: 70%; height: 150%; transform: none; opacity: .42; }
+    .col:nth-child(even) { margin-top: -90px; }
+    @media (max-width: 900px) { .wall-in { left: -10%; top: -8%; width: 170%; opacity: .42; } }
+    .shots .phone { background: linear-gradient(160deg, color-mix(in oklab, var(--accent) 55%, #2b2b31), #0e0e11 46%); }
+    .track { animation-duration: calc(var(--d) * 1.15); }
+    .mp { border-radius: 28px; } .mp::before { border-radius: 23px 23px 0 0; } .mp img { border-radius: 0 0 23px 23px; }
+
+    /* App-Familie: Suite-Block + Block „Weitere Apps“ (eigener Tarif) */
+    .fam-self { display: inline-flex; align-items: center; gap: 7px; margin-top: 16px; padding: 6px 13px; border-radius: 99px; font-size: 14px; font-weight: 600;
+      background: color-mix(in oklab, var(--accent) 16%, transparent); color: var(--accent-text); }
+    .fam-self .i { width: 16px; height: 16px; }
+    .fam-self.own { background: transparent; color: var(--ink); border: 1px dashed color-mix(in oklab, var(--ink) 40%, transparent); }
+    .fam-tier { margin-top: 30px; }
+    .fam-tier.own { margin-top: 26px; padding-top: 24px; border-top: 1px dashed var(--border); }
+    .fam-tier .family { margin-top: 12px; }
+    .fam-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 15px; }
+    .fam-head b { font-weight: 650; }
+    .fam-tag { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 99px; font-size: 12px; font-weight: 700; letter-spacing: .02em;
+      background: color-mix(in oklab, var(--accent) 18%, transparent); color: var(--accent-text); }
+    .fam-tag .i { width: 14px; height: 14px; }
+    .fam-tag.own { background: transparent; color: var(--muted); border: 1px dashed color-mix(in oklab, var(--muted) 70%, transparent); }
+    @media (max-width: 480px) { .fam-head { font-size: 14px; } .fam-tier .family { margin-top: 8px; } }
+  </style>
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="ObjektDex Startseite"><img src="assets/apps/objektdex.webp" alt="" width="32" height="32" /><span class="wm">Objekt<span>Dex</span></span></a>
+      <nav aria-label="Seitennavigation"><a href="#funktionen">Funktionen</a><a href="#preise">Preise</a><a href="#faq">FAQ</a></nav>
+      <a class="btn sm" href="#ablauf">Bald verfügbar</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero walled">
+      <div class="wall" aria-hidden="true"><div class="wall-in"><div class="col" style="--d:70s"><div class="track"><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-1.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-3.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-5.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-7.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-1.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-3.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-5.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-7.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div></div></div><div class="col" style="--d:88s"><div class="track"><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-4.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-6.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-1.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-3.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-4.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-6.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-1.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-3.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div></div></div><div class="col" style="--d:106s"><div class="track"><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-7.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-2.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-4.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-6.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-7.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-2.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-4.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-6.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div></div></div><div class="col" style="--d:79s"><div class="track"><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-3.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-5.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-7.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-2.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-3.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-5.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-7.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-2.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div></div></div><div class="col" style="--d:97s"><div class="track"><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-6.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-1.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-3.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-5.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-6.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-1.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-3.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-5.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div></div></div><div class="col" style="--d:70s"><div class="track"><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-2.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-4.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-6.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-1.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-2.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-4.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-6.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div><div class="mp" style="--bar:#071e1c"><img src="assets/shots/wand-1.webp" width="300" height="533" alt="" decoding="async" fetchpriority="low"></div></div></div></div></div>
+      <div class="wrap">
+        <div>
+          <span class="kicker">Für Hausbetreuung, Reinigung & Grünpflege</span>
+          <h1>Belegt, dass du da warst. <em>Und was du gemacht hast.</em></h1>
+          <p class="sub">Am Objekt ein Tipp: die heute fälligen Leistungen sind schon angehakt, Foto dazu, fertig. <strong>Zeit, Ort und ein PDF mit Soll/Ist für die Hausverwaltung — gegen „Es war keiner da“.</strong></p>
+          <div class="cta">
+            <a class="btn" id="store-link" href="mailto:support@dexware.app?subject=ObjektDex%20%E2%80%93%20bitte%20Bescheid%20geben%2C%20sobald%20verf%C3%BCgbar"><svg class="play" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5z"/></svg>Bald bei Google Play – Bescheid geben</a>
+            
+            <a class="btn ghost" href="#ablauf">So funktioniert's</a>
+          </div>
+          
+          <ul class="ticks"><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Leistungen mit Turnus: täglich bis monatlich</li><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Heute: grün, orange, rot auf einen Blick</li><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Gratis für 2 Objekte</li></ul>
+        </div>
+        <div class="shots" aria-label="Screenshots der App">
+          <div class="phone a"><div class="screen" style="--bar:#071e1c"><img src="assets/shots/hero-1.webp" width="600" height="1067" alt="ObjektDex: Reiter Heute mit Fortschrittsring „1 von 5“, ein Objekt überfällig, drei offen, großer Knopf Dokumentieren" decoding="async"></div></div>
+          <div class="phone b"><div class="screen" style="--bar:#071e1c"><img src="assets/shots/hero-2.webp" width="600" height="1067" alt="ObjektDex: Einsatz dokumentieren — fällige Leistung Mülltonnen schon angehakt, Standort erfasst, Fotos, Speichern" decoding="async"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <section id="sollist">
+      <div class="wrap show">
+        <div class="show-visual rv"><div class="odsi" role="img" aria-label="Beispiel: Soll/Ist im Oktober — Treppenhausreinigung 9 von 9, Mülltonnen 4 von 4, Kontrollgang 5 von 5.">
+          <div class="od-head"><b>WEG Lindenstraße 12</b><span>Oktober · Soll/Ist</span></div>
+          <div class="od-row"><span class="od-name">Treppenhausreinigung<small>Mo + Do</small></span><span class="od-bar"><i style="--w:100%"></i></span><b>9 von 9</b></div>
+          <div class="od-row"><span class="od-name">Mülltonnen raus/rein<small>Jeden Dienstag</small></span><span class="od-bar"><i style="--w:100%"></i></span><b>4 von 4</b></div>
+          <div class="od-row"><span class="od-name">Kontrollgang<small>Jeden Freitag</small></span><span class="od-bar"><i style="--w:100%"></i></span><b>5 von 5</b></div>
+          <div class="od-row"><span class="od-name">Zählerstände<small>Monatsletzter</small></span><span class="od-bar muted"><i style="--w:0%"></i></span><b class="od-neutral">noch nicht fällig</b></div>
+        </div></div>
+        <div class="rv">
+          <p class="eyebrow">Soll/Ist</p>
+          <h2>Die Hausverwaltung sieht schwarz auf weiß, was erledigt ist</h2>
+          <p class="lead">Jede Leistung hat ihren Turnus. ObjektDex zählt mit: <strong>„4 von 4 Treppenhausreinigungen“</strong> — im PDF und auf Wunsch über einen Lese-Link, ganz ohne Konto für den Auftraggeber.</p>
+          <ul class="rules show-points">
+            <li><span class="ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /><path d="m9 16 2 2 4-4" /></svg></span><span><b>Turnus</b>Täglich, an bestimmten Wochentagen, alle 14 Tage, monatlich (auch am Monatsletzten) oder nach Bedarf.</span></li>
+            <li><span class="ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 22h14" /><path d="M19.27 13.73A2.5 2.5 0 0 0 17.5 13h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1.5c0-.66-.26-1.3-.73-1.77Z" /><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-3-3c-1.66 0-3 1-3 3s1 2 1 3.5V13" /></svg></span><span><b>Unveränderlich</b>Gespeicherte Einsätze bekommen Serverzeit und Prüfcode. Korrektur nur als Storno mit Begründung — sichtbar.</span></li>
+            <li><span class="ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg></span><span><b>Link für den Auftraggeber</b>Lesen im Browser, Personen nur mit Vorname und Anfangsbuchstabe, jederzeit widerrufbar (Pro).</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section id="funktionen">
+      <div class="wrap">
+        <div class="head rv">
+          <p class="eyebrow">Funktionen</p>
+          <h2>Der Leistungsnachweis fürs ganze Jahr</h2>
+          <p class="lead">Keine Rechnungen, keine Lohn-Zeiterfassung, kein Putzplan für zu Hause. ObjektDex macht genau eins: belegen, was am Objekt erledigt wurde.</p>
+        </div>
+        <div class="features">
+          <article class="feature rv"><span class="ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" /><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" /><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" /><path d="M10 6h4" /><path d="M10 10h4" /><path d="M10 14h4" /><path d="M10 18h4" /></svg></span><h3>Objekte & Leistungen</h3><p>Adresse, Auftraggeber, Ansprechpartner. Leistungen aus Vorlagen — Treppenhaus, Mülltonnen, Rasen, Hecke, Laub, Kontrollgang, Spielplatz — oder eigene.</p></article>
+          <article class="feature rv"><span class="ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4" /><path d="m3 7 2 2 4-4" /><path d="M13 6h8" /><path d="M13 12h8" /><path d="M13 18h8" /></svg></span><h3>Heute</h3><p>Welche Objekte heute dran sind: grün erledigt, orange offen, rot überfällig — und „4 von 9 erledigt“. Auf Wunsch morgens eine Erinnerung.</p></article>
+          <article class="feature rv"><span class="ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" /><circle cx="12" cy="13" r="3" /></svg></span><h3>Einsatz mit einem Tipp</h3><p>Fällige Leistungen sind vorgewählt. Fotos und Notiz dazu, Beginn, Ende und Standort hält die App fest — der Standort nur in diesem Moment.</p></article>
+          <article class="feature rv"><span class="ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg></span><h3>Mängel melden</h3><p>Haustür, Leuchte, Schaukel: mit Foto und Text melden. Offene Mängel bleiben sichtbar, bis jemand sie erledigt.</p></article>
+          <article class="feature rv"><span class="ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /><path d="M14 2v4a2 2 0 0 0 2 2h4" /><path d="M10 9H8" /><path d="M16 13H8" /><path d="M16 17H8" /></svg></span><h3>PDF-Nachweis</h3><p>Je Objekt und Zeitraum: alle Einsätze mit Datum, Uhrzeit und Person, Soll/Ist je Leistung, Fotos, Mängel und Prüfcode.</p></article>
+          <article class="feature rv"><span class="ic"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></span><h3>Funkloch? Egal.</h3><p>Einsätze, Fotos und Mängel warten am Handy und gehen raus, sobald wieder Netz da ist. Nichts geht verloren.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft" id="ablauf">
+      <div class="wrap flow">
+        <div class="rv">
+          <p class="eyebrow">So funktioniert's</p>
+          <h2>In drei Schritten startklar</h2>
+          <ol class="steps">
+            <li><b>Objekt anlegen</b><p>Adresse und Auftraggeber eintragen, dann die Leistungen mit ihrem Turnus wählen. Ein Beispiel-Betrieb zum Ausprobieren ist auch ohne Konto dabei.</p></li>
+            <li><b>Team einladen</b><p>Alle geben deinen Team-Code ein (<span style="white-space:nowrap">OD-XXXX-XXXX</span>) — fertig. Du verwaltest, dein Team dokumentiert.</p></li>
+            <li><b>Dokumentieren & belegen</b><p>Am Objekt ein Tipp. Am Monatsende das PDF mit Soll/Ist an die Hausverwaltung — oder ihr gleich den Lese-Link geben.</p></li>
+          </ol>
+        </div>
+        <div class="rv"><div class="phone lazy"><div class="screen" style="--bar:#071e1c"><img src="assets/shots/ablauf.webp" width="600" height="1067" alt="ObjektDex: Objekt mit Leistungen und Soll/Ist im Monat, z. B. Treppenhausreinigung 3 von 3" decoding="async" loading="lazy"></div></div></div>
+      </div>
+    </section>
+
+    <section id="preise">
+      <div class="wrap">
+        <div class="head rv">
+          <p class="eyebrow">Preise</p>
+          <h2>Kostenlos starten, bei Bedarf upgraden.</h2>
+        </div>
+        <div class="plans">
+          <div class="plan rv">
+            <h3>Free</h3>
+            <p class="price">0 €</p>
+            <p class="per">für immer</p>
+            <ul><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>2 Objekte mit allen Grundfunktionen</li><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Heute, Einsätze, Mängel</li><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>PDF-Nachweis mit Hinweis „Gratis-Version“</li></ul>
+          </div>
+          <div class="plan pro rv">
+            <span class="badge">Empfohlen</span>
+            <h3>ObjektDex Pro</h3>
+            <p class="price">Pro</p>
+            <p class="per">monatlich oder jährlich — Preis im Store</p>
+            <ul><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Unbegrenzt Objekte</li><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Team bis 20 Mitarbeiter (größere Teams als Team-Stufe)</li><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Link für die Hausverwaltung</li><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Runden: Kehr-, Mäh- und Kontrollrunden</li><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Eigenes Logo im PDF</li></ul>
+          </div>
+          <div class="plan suite rv">
+            <span class="badge">Im Suite-Abo enthalten</span>
+            <h3>Dexware Suite</h3>
+            <p class="price">39,99 € <small>/ Monat</small></p>
+            <p class="per">oder 319,99 € im Jahr · entspricht 26,67 € im Monat</p>
+            <ul>
+              <li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Alle 15 Prüf-Apps der Suite freigeschaltet</li>
+              <li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Neue Apps automatisch dabei</li>
+              <li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Ein Abo für alle Geräte</li>
+            </ul>
+            <div class="icons" aria-hidden="true"><img src="assets/apps/gurtdex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/toredex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/geruestdex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/feuerdex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/leiterdex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/regaldex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/spieldex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/winterdex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/kfzdex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/pruefdex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/schutzdex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/baumdex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/tourdex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/craftdex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/dokudex.webp" alt="" width="26" height="26" loading="lazy" /><img src="assets/apps/objektdex.webp" alt="" width="26" height="26" loading="lazy" /></div>
+          </div>
+        </div>
+        
+        <p class="fine">Abschluss direkt in der App über Google Play · jederzeit kündbar · Preise inkl. MwSt.</p>
+        <ul class="trust rv"><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg><span>Kein Tracking, keine Werbung</span></li><li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg><span>Persönlicher Support: <a href="mailto:support@dexware.app">support@dexware.app</a></span></li></ul>
+      </div>
+    </section>
+
+    <section class="soft" id="faq">
+      <div class="wrap faq">
+        <div class="rv">
+          <p class="eyebrow">FAQ</p>
+          <h2>Häufige Fragen</h2>
+          <p class="ask"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg><span>Noch etwas offen? <a href="mailto:support@dexware.app?subject=ObjektDex">support@dexware.app</a></span></p>
+        </div>
+        <div class="rv">
+          <details><summary>Wird mein Team geortet?<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary><div class="a">Nein, es gibt keine Dauer-Ortung. Der Standort wird nur in dem Moment erfasst, in dem jemand einen Einsatz dokumentiert — und nur, wenn er das erlaubt. Ohne Erlaubnis funktioniert alles, nur ohne GPS-Stempel. Einzige Ausnahme: eine Runde, die man selbst startet, zeichnet den Weg bis „Runde beenden“ auf.</div></details>
+          <details><summary>Kann man einen Einsatz nachträglich ändern?<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary><div class="a">Nein. Gespeicherte Einsätze bleiben, wie sie sind, und bekommen beim Eingang die Serverzeit und einen Prüfcode. Ein Fehler wird als Storno mit Begründung durch den Inhaber vermerkt — der Eintrag bleibt sichtbar.</div></details>
+          <details><summary>Was sieht die Hausverwaltung über den Link?<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary><div class="a">Die Einsätze der letzten Wochen mit Leistungen, Uhrzeit und Fotos, das Soll/Ist des Monats und die Mängel. Personen nur mit Vorname und Anfangsbuchstabe, keine Koordinaten. Du kannst jeden Link jederzeit widerrufen.</div></details>
+          <details><summary>Was passiert im Funkloch?<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary><div class="a">Die App speichert den Einsatz samt Fotos auf dem Handy und schickt ihn nach, sobald wieder Netz da ist — mit der Uhrzeit, zu der er wirklich dokumentiert wurde.</div></details>
+          <details><summary>Und im Winter?<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary><div class="a">Für den Winterdienst gibt es WinterDex — mit dem gleichen Bedienkonzept. Mit dem Dexware-Suite-Abo ist Pro in beiden enthalten.</div></details>
+          <details><summary>Ist das eine Zeiterfassung?<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary><div class="a">Nein. ObjektDex belegt Leistungen am Objekt. Für Lohnabrechnung, Angebote oder Rechnungen ist es nicht gedacht.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section id="dexware">
+      <div class="wrap">
+        <div class="family-row rv">
+          <div>
+            <p class="eyebrow">Teil von Dexware</p>
+            <h2>Eine App pro Pflicht.</h2>
+            <p class="lead">ObjektDex gehört zu Dexware — schlanke Apps für Prüfung und Dokumentation im Betrieb.</p>
+            <p class="fam-self"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>ObjektDex ist im Suite-Abo enthalten</p>
+          </div>
+          <a href="https://dexware.app/" class="btn ghost sm">Alle Apps ansehen <svg class="i sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></a>
+        </div>
+        <div class="fam-tier rv">
+          <p class="fam-head"><span class="fam-tag"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>Im Suite-Abo</span><b>Dexware Suite – ein Abo, alle Prüf-Apps</b></p>
+          <div class="family">
+          <a href="https://hebedex.dexware.app"><img src="assets/apps/hebedex.webp" alt="" width="44" height="44" loading="lazy" /><b>HebeDex</b><small>Anschlag- & Zurrmittel · bald</small></a>
+          <a href="https://gurtdex.dexware.app"><img src="assets/apps/gurtdex.webp" alt="" width="44" height="44" loading="lazy" /><b>GurtDex</b><small>PSA gegen Absturz</small></a>
+          <a href="https://toredex.dexware.app"><img src="assets/apps/toredex.webp" alt="" width="44" height="44" loading="lazy" /><b>ToreDex</b><small>Tore & Türen</small></a>
+          <a href="https://geruestdex.dexware.app"><img src="assets/apps/geruestdex.webp" alt="" width="44" height="44" loading="lazy" /><b>GerüstDex</b><small>Gerüstprüfung</small></a>
+          <a href="https://feuerdex.dexware.app"><img src="assets/apps/feuerdex.webp" alt="" width="44" height="44" loading="lazy" /><b>FeuerDex</b><small>Feuerlöscher</small></a>
+          <a href="https://leiterdex.dexware.app"><img src="assets/apps/leiterdex.webp" alt="" width="44" height="44" loading="lazy" /><b>LeiterDex</b><small>Leitern & Tritte</small></a>
+          <a href="https://regaldex.dexware.app"><img src="assets/apps/regaldex.webp" alt="" width="44" height="44" loading="lazy" /><b>RegalDex</b><small>Regalinspektion</small></a>
+          <a href="https://spieldex.dexware.app"><img src="assets/apps/spieldex.webp" alt="" width="44" height="44" loading="lazy" /><b>SpielDex</b><small>Spielplatzkontrolle</small></a>
+          <a href="https://winterdex.dexware.app"><img src="assets/apps/winterdex.webp" alt="" width="44" height="44" loading="lazy" /><b>WinterDex</b><small>Winterdienst</small></a>
+          <a href="https://kfzdex.dexware.app"><img src="assets/apps/kfzdex.webp" alt="" width="44" height="44" loading="lazy" /><b>KfzDex</b><small>Fuhrpark & UVV</small></a>
+          <a href="https://pruefdex.dexware.app"><img src="assets/apps/pruefdex.webp" alt="" width="44" height="44" loading="lazy" /><b>PrüfDex</b><small>DGUV V3</small></a>
+          <a href="https://schutzdex.dexware.app"><img src="assets/apps/schutzdex.webp" alt="" width="44" height="44" loading="lazy" /><b>SchutzDex</b><small>Unterweisungen</small></a>
+          <a href="https://baumdex.dexware.app"><img src="assets/apps/baumdex.webp" alt="" width="44" height="44" loading="lazy" /><b>BaumDex</b><small>Baumkataster</small></a>
+          <a href="https://tourdex.dexware.app"><img src="assets/apps/tourdex.webp" alt="" width="44" height="44" loading="lazy" /><b>TourDex</b><small>Fahrtenbuch</small></a>
+          <a href="https://craftdex.dexware.app"><img src="assets/apps/craftdex.webp" alt="" width="44" height="44" loading="lazy" /><b>CraftDex</b><small>Projekt-Doku</small></a>
+          <a href="https://dokudex.dexware.app"><img src="assets/apps/dokudex.webp" alt="" width="44" height="44" loading="lazy" /><b>DokuDex</b><small>Dokumente & KI</small></a>
+          </div>
+        </div>
+        <div class="fam-tier own rv">
+          <p class="fam-head"><span class="fam-tag own"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></svg>Eigener Tarif</span><b>Weitere Apps von Dexware – nicht im Suite-Abo</b></p>
+          <div class="family">
+          <a href="https://hausdex.dexware.app"><img src="assets/apps/hausdex.webp" alt="" width="44" height="44" loading="lazy" /><b>HausDex</b><small>Hausakte · bald</small></a>
+          <a href="https://installateurdex.dexware.app"><img src="assets/apps/installateurdex.webp" alt="" width="44" height="44" loading="lazy" /><b>InstallateurDex</b><small>Wartung & Kundendienst · bald</small></a>
+          <a href="https://mietzeuge.dexware.app"><img src="assets/apps/mietzeuge.webp" alt="" width="44" height="44" loading="lazy" /><b>Mietzeuge</b><small>Wohnungsübergabe · bald</small></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 ObjektDex · ein Produkt von <a href="https://dexware.app/">Dexware</a></span>
+      <nav aria-label="Rechtliches"><a href="impressum.html">Impressum</a><a href="agb.html">AGB</a><a href="datenschutz.html">Datenschutz</a><a href="konto-loeschung.html">Konto löschen</a><a href="mailto:support@dexware.app?subject=ObjektDex%20Support">Support</a></nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var top = document.querySelector('.top');
+      var onScroll = function () { top.classList.toggle('scrolled', window.scrollY > 8); };
+      onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+      var wall = document.querySelector('.wall');
+      if (wall && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) { wall.classList.toggle('paused', !es[0].isIntersecting); }).observe(wall);
+      }
+      var els = document.querySelectorAll('.rv');
+      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(function (e) { e.classList.add('in'); }); return;
+      }
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+  </script>
+</body>
+</html>

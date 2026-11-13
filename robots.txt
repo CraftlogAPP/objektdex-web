@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /nachweis/
+Disallow: /pruefung/
+
+Sitemap: https://objektdex.dexware.app/sitemap.xml

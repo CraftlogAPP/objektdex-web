@@ -87,7 +87,7 @@
   // Fotos: privat; erst mit PHOTO_FN (Edge Function, signiert nach share_link_photo_allowed) sichtbar, sonst nur die Anzahl.
   const SUPABASE_URL = 'https://yugakdpkrbcenyqkzkad.supabase.co';   // z. B. https://<ref>.supabase.co
   const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1Z2FrZHBrcmJjZW55cWt6a2FkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ0OTYyMzcsImV4cCI6MjExMDA3MjIzN30.qIYvan-DkXiIfFR4wYaldlJ1svgKPzV86XJjZqMlQ9M';
-  const PHOTO_FN = '';                                  // z. B. https://<ref>.supabase.co/functions/v1/nachweis-fotos
+  const PHOTO_FN = 'https://yugakdpkrbcenyqkzkad.supabase.co/functions/v1/nachweis-fotos';                                  // z. B. https://<ref>.supabase.co/functions/v1/nachweis-fotos
 
   const $app = document.getElementById('app');
   const token = decodeURIComponent((location.hash || '').replace(/^#/, '').trim());

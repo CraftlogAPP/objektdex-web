@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Laub auf dem Gehweg: Pflicht und Nachweis | ObjektDex</title>
+  <meta name="description" content="Laub auf dem Gehweg: wer in Deutschland und Österreich kehren muss, was § 93 StVO und die Straßenreinigungssatzung verlangen und wie man es belegt." />
+  <meta name="theme-color" content="#0A1615" />
+  <!-- seo:start -->
+  <link rel="icon" type="image/png" href="/objektdex-icon.png" />
+  <link rel="canonical" href="https://objektdex.dexware.app/ratgeber-gehweg-reinigen-laub.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="ObjektDex" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:title" content="Laub auf dem Gehweg: wer kehren muss und wie man es belegt" />
+  <meta property="og:description" content="Laub auf dem Gehweg: wer in Deutschland und Österreich kehren muss, was § 93 StVO und die Straßenreinigungssatzung verlangen und wie man es belegt." />
+  <meta property="og:url" content="https://objektdex.dexware.app/ratgeber-gehweg-reinigen-laub.html" />
+  <meta property="og:image" content="https://objektdex.dexware.app/objektdex-icon.png" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="https://objektdex.dexware.app/objektdex-icon.png" />
+  <meta name="twitter:title" content="Laub auf dem Gehweg: wer kehren muss und wie man es belegt" />
+  <meta name="twitter:description" content="Laub auf dem Gehweg: wer in Deutschland und Österreich kehren muss, was § 93 StVO und die Straßenreinigungssatzung verlangen und wie man es belegt." />
+  <!-- seo:end -->
+  <link rel="preload" href="assets/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face { font-family: 'Inter'; src: url('assets/inter-latin-var.woff2') format('woff2');
+      font-weight: 100 900; font-style: normal; font-display: swap; }
+    :root {
+      --accent: #34D8A6;
+      --on-accent: #04261D;
+      --radius: 16px;
+      --wrap: 1120px;
+    }
+    html.light {
+      --bg: #ffffff;
+      --bg-soft: color-mix(in oklab, #f7f7f9 96%, var(--accent));
+      --surface: #ffffff;
+      --border: color-mix(in oklab, #e7e7eb 94%, var(--accent));
+      --ink: #0d0d12;
+      --muted: #5c5c69;
+      --accent-text: color-mix(in oklab, var(--accent) 82%, #000);
+      --accent-soft: color-mix(in oklab, var(--accent) 10%, #fff);
+      --card: var(--surface);
+      --shadow: 0 1px 2px rgba(16,16,24,.04), 0 8px 24px -12px rgba(16,16,24,.12);
+      color-scheme: light;
+    }
+    html.dark {
+      --bg: #0A1615;
+      --bg-soft: color-mix(in oklab, #0A1615 96%, #fff);
+      --surface: color-mix(in oklab, #0A1615 93%, #fff);
+      --card: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      --border: rgba(255,255,255,.085);
+      --ink: #f6f5f7;
+      --muted: #aaa4ad;
+      --accent-text: color-mix(in oklab, var(--accent) 70%, #fff);
+      --accent-soft: color-mix(in oklab, var(--accent) 18%, transparent);
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px -16px rgba(0,0,0,.6);
+      color-scheme: dark;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+    body { background: var(--bg); color: var(--ink);
+      font: 400 16px/1.6 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-feature-settings: 'cv11', 'ss01'; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: var(--accent-text); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+    img { max-width: 100%; }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+    @media (max-width: 600px) { .wrap { padding: 0 16px; } }
+    .i { width: 20px; height: 20px; flex: none; }
+
+    /* Kopfzeile */
+    .top { position: sticky; top: 0; z-index: 40; background: color-mix(in oklab, var(--bg) 82%, transparent);
+      -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
+      border-bottom: 1px solid transparent; transition: border-color .2s; }
+    .top.scrolled { border-bottom-color: var(--border); }
+    .top .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 650; font-size: 17px; letter-spacing: -.01em; }
+    .brand:hover { text-decoration: none; }
+    /* Feiner heller Rand wie auf dem Hub: dunkle Symbole (TourDex, GurtDex, HebeDex, KfzDex) verschwinden sonst im dunklen Hintergrund. */
+    .brand img { width: 32px; height: 32px; border-radius: 8px; box-shadow: 0 0 0 1px rgba(255,255,255,.16); }
+    .brand .wm span { color: var(--accent-text); }
+    .top nav { display: flex; gap: 24px; margin-left: auto; }
+    .top nav a { color: var(--muted); font-size: 14.5px; font-weight: 500; }
+    .top nav a:hover { color: var(--ink); text-decoration: none; }
+    @media (max-width: 760px) { .top nav { display: none; } .top .btn { margin-left: auto; } }
+
+    /* Knöpfe */
+    .btn { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 22px; border-radius: 12px;
+      font-weight: 600; font-size: 15.5px; background: var(--accent); color: var(--on-accent);
+      box-shadow: 0 1px 0 rgba(255,255,255,.18) inset, 0 6px 20px -8px color-mix(in oklab, var(--accent) 70%, transparent);
+      transition: transform .15s, box-shadow .15s, background .15s; }
+    .btn:hover { text-decoration: none; transform: translateY(-1px);
+      box-shadow: 0 1px 0 rgba(255,255,255,.18) inset, 0 10px 26px -8px color-mix(in oklab, var(--accent) 80%, transparent); }
+    .btn.sm { height: 38px; padding: 0 16px; font-size: 14px; border-radius: 10px; }
+    .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--border); }
+    .btn.ghost:hover { background: var(--bg-soft); }
+    .btn .play { width: 14px; height: 14px; fill: currentColor; stroke: none; }
+    .btn .i { width: 16px; height: 16px; }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: -20% -10% auto 40%; height: 120%; z-index: -1; pointer-events: none;
+      background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 22%, transparent), transparent 75%); }
+    .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; padding-top: 56px; padding-bottom: 40px; }
+    .kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--accent-text);
+      background: var(--accent-soft); padding: 6px 12px; border-radius: 999px; margin-bottom: 22px; }
+    h1 { font-size: clamp(34px, 4.6vw, 54px); line-height: 1.05; font-weight: 750; letter-spacing: -.035em; }
+    h1 em { font-style: normal; color: var(--accent-text); }
+    .sub { margin-top: 20px; font-size: 18px; line-height: 1.6; color: var(--muted); max-width: 520px; }
+    .sub strong { color: var(--ink); font-weight: 600; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .hint { margin-top: 12px; font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .hint .i { width: 15px; height: 15px; }
+    .ticks { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .ticks li { list-style: none; display: flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 500; }
+    .ticks .i { width: 17px; height: 17px; color: var(--accent-text); }
+    .shots { position: relative; height: 560px; }
+    .shots .phone { position: absolute; }
+    .shots .phone.a { left: 4%; top: 0; z-index: 2; }
+    .shots .phone.b { right: 0; top: 64px; transform: scale(.9); transform-origin: top right; opacity: .96; }
+    @media (max-width: 900px) {
+      .hero .wrap { grid-template-columns: 1fr; gap: 36px; padding-top: 36px; }
+      .shots { height: 380px; max-width: 420px; width: 100%; margin: 0 auto;
+        -webkit-mask-image: linear-gradient(#000 70%, transparent); mask-image: linear-gradient(#000 70%, transparent); }
+      .shots .phone { --pw: 210px; }
+      .shots .phone.a { left: 2%; } .shots .phone.b { top: 40px; }
+    }
+
+    /* Handyrahmen */
+    .phone { --pw: 262px; width: var(--pw); padding: 8px; border-radius: calc(var(--pw) * .16);
+      background: linear-gradient(160deg, #2b2b31, #0e0e11 40%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset, 0 0 0 1px rgba(0,0,0,.5), 0 40px 70px -30px rgba(10,10,20,.55), 0 18px 30px -18px rgba(10,10,20,.35); }
+    .screen { position: relative; border-radius: calc(var(--pw) * .13); overflow: hidden; background: var(--bar); padding-top: calc(var(--pw) * .1); }
+    .screen::before { content: ''; position: absolute; top: calc(var(--pw) * .03); left: 50%; transform: translateX(-50%);
+      width: 30%; height: calc(var(--pw) * .075); border-radius: 99px; background: #000; }
+    .screen img { display: block; width: 100%; height: auto; }
+
+    /* Abschnitte */
+    section { padding: 80px 0; }
+    section.soft { background: var(--bg-soft); }
+    @media (max-width: 700px) {
+      section { padding: 52px 0; }
+      .head { margin-bottom: 24px; }
+      .lead { font-size: 16px; }
+      .sub { font-size: 16.5px; }
+      .cta .btn { flex: 1 1 100%; justify-content: center; }
+      .ticks { gap: 8px 16px; }
+      .rules li { padding: 14px 16px; grid-template-columns: 32px 1fr; gap: 12px; font-size: 14.5px; }
+      .rules .ic { width: 32px; height: 32px; }
+    }
+    .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: var(--accent-text); margin-bottom: 10px; }
+    h2 { font-size: clamp(27px, 3.4vw, 38px); line-height: 1.12; font-weight: 720; letter-spacing: -.03em; max-width: 760px; }
+    .lead { margin-top: 14px; font-size: 17px; color: var(--muted); max-width: 620px; }
+    .lead strong { color: var(--ink); font-weight: 600; }
+    .head { margin-bottom: 40px; }
+
+    /* Pflicht */
+    .duty { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: start; }
+    .rules { list-style: none; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .rules li { display: grid; grid-template-columns: 36px 1fr; gap: 14px; padding: 18px 22px; border-top: 1px solid var(--border); font-size: 15px; color: var(--muted); }
+    .rules li:first-child { border-top: 0; }
+    .rules b { display: block; color: var(--ink); font-weight: 600; font-size: 15.5px; margin-bottom: 1px; }
+    .ic { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-text); }
+    @media (max-width: 860px) { .duty { grid-template-columns: 1fr; gap: 28px; } }
+
+    /* Funktionen */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .feature .ic { margin-bottom: 16px; }
+    .feature h3 { font-size: 16.5px; font-weight: 640; letter-spacing: -.01em; margin-bottom: 6px; }
+    .feature p { font-size: 15px; color: var(--muted); line-height: 1.55; }
+    @media (max-width: 900px) { .features { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .features { grid-template-columns: 1fr; gap: 10px; }
+      .feature { padding: 16px; display: grid; grid-template-columns: 36px 1fr; gap: 0 14px; }
+      .feature .ic { margin: 0; grid-row: span 2; } .feature p { font-size: 14.5px; } }
+
+    /* Ablauf */
+    .flow { display: grid; grid-template-columns: 1fr auto; gap: 72px; align-items: center; }
+    .steps { list-style: none; counter-reset: s; margin-top: 32px; }
+    .steps li { counter-increment: s; position: relative; padding: 0 0 26px 56px; }
+    .steps li:last-child { padding-bottom: 0; }
+    .steps li::before { content: counter(s); position: absolute; left: 0; top: -2px; width: 36px; height: 36px; border-radius: 50%;
+      display: grid; place-items: center; font-weight: 650; font-size: 15px; background: var(--accent); color: var(--on-accent); }
+    .steps li:not(:last-child)::after { content: ''; position: absolute; left: 17.5px; top: 40px; bottom: 6px; width: 1px; background: var(--border); }
+    .steps b { display: block; font-size: 17px; font-weight: 640; margin-bottom: 4px; }
+    .steps p { color: var(--muted); font-size: 15.5px; }
+    .flow .phone { --pw: 280px; }
+    @media (max-width: 860px) { .flow { grid-template-columns: 1fr; } .flow > div:last-child { display: none; } .steps { margin-top: 24px; } }
+
+    /* Preise */
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+    .plan { position: relative; display: flex; flex-direction: column; min-width: 0; background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+    .plan.pro { border-color: color-mix(in oklab, var(--accent) 55%, var(--border)); box-shadow: 0 0 0 1px color-mix(in oklab, var(--accent) 55%, transparent), var(--shadow); }
+    .plan .badge { position: absolute; top: -11px; left: 28px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 99px; background: var(--accent); color: var(--on-accent); }
+    .plan h3 { font-size: 15px; font-weight: 600; color: var(--muted); }
+    .price { margin-top: 10px; font-size: 38px; font-weight: 720; letter-spacing: -.03em; line-height: 1.1; }
+    .price small { font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+    .per { font-size: 14px; color: var(--muted); margin-top: 4px; min-height: 22px; }
+    .plan ul { list-style: none; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--border); display: grid; gap: 10px; }
+    .plan li { display: flex; gap: 10px; font-size: 15px; }
+    .plan li .i { width: 18px; height: 18px; margin-top: 2px; color: var(--accent-text); }
+    .plan.suite { color: #f4f4f6; border: 1px solid transparent;
+      background: linear-gradient(180deg, #121218, #0b0b0f) padding-box, linear-gradient(140deg, #3b82f6, #8b5cf6 55%, var(--accent)) border-box; }
+    .plan.suite h3, .plan.suite .per, .plan.suite .price small { color: #a3a3ad; }
+    .plan.suite ul { border-color: rgba(255,255,255,.1); }
+    .plan.suite li .i { color: #f4f4f6; }
+    .icons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 22px; }
+    .icons img { width: 26px; height: 26px; border-radius: 7px; }
+    .fine { margin-top: 20px; font-size: 13.5px; color: var(--muted); }
+    .trust { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px 26px; font-size: 14px; color: var(--muted); }
+    .trust li { display: flex; align-items: center; gap: 8px; }
+    .trust .i { width: 18px; height: 18px; flex: none; color: var(--accent-text); }
+    .trust a { color: inherit; }
+    @media (max-width: 960px) { .plans { grid-template-columns: 1fr; max-width: 480px; } }
+
+    /* FAQ */
+    .faq { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: start; }
+    .faq details { border-bottom: 1px solid var(--border); }
+    .faq details:first-child { border-top: 1px solid var(--border); }
+    .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 16px; align-items: center;
+      padding: 18px 2px; font-weight: 600; font-size: 16px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary .i { color: var(--muted); transition: transform .2s; }
+    .faq details[open] summary .i { transform: rotate(180deg); }
+    .faq .a { padding: 0 2px 20px; color: var(--muted); font-size: 15.5px; max-width: 640px; }
+    .ask { margin-top: 18px; color: var(--muted); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+    @media (max-width: 860px) { .faq { grid-template-columns: 1fr; gap: 24px; } }
+
+    /* Familie */
+    .family { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin-top: 32px; }
+    .family a { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 6px 14px; border-radius: 14px;
+      color: var(--ink); text-align: center; transition: background .15s; }
+    .family a:hover { background: var(--surface); text-decoration: none; box-shadow: var(--shadow); }
+    .family a[aria-disabled] { cursor: default; opacity: .75; } .family a[aria-disabled]:hover { background: none; box-shadow: none; }
+    .family img { width: 44px; height: 44px; border-radius: 11px; box-shadow: 0 0 0 1px rgba(255,255,255,.16); }
+    .family b { font-size: 13.5px; font-weight: 600; line-height: 1.2; }
+    .family small { font-size: 12px; color: var(--muted); line-height: 1.3; }
+    .family-row { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+    @media (max-width: 900px) { .family { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 480px) { .family { grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 20px; } .family a { padding: 10px 2px; gap: 6px; }
+      .family img { width: 40px; height: 40px; } .family b { font-size: 11.5px; } .family small { display: none; } }
+
+    /* Prüfpunkte (optional) */
+    .points { margin-top: 16px; padding: 22px 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); }
+    .points p { font-size: 15px; color: var(--muted); margin-bottom: 14px; }
+    .points p b { color: var(--ink); font-weight: 600; margin-right: 4px; }
+    .points ol { list-style: none; counter-reset: p; display: flex; flex-wrap: wrap; gap: 8px; }
+    .points li { counter-increment: p; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500;
+      padding: 5px 12px 5px 5px; border-radius: 99px; background: var(--bg-soft); border: 1px solid var(--border); }
+    .points li::before { content: counter(p); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+      font-size: 12px; font-weight: 650; background: var(--accent-soft); color: var(--accent-text); }
+    .points.plain li { padding: 5px 12px; }
+    .points.plain li::before { display: none; }
+    @media (max-width: 600px) { .points { padding: 16px; } .points li { font-size: 13px; } }
+
+    /* Fußzeile */
+    footer { border-top: 1px solid var(--border); padding: 32px 0 40px; font-size: 14px; color: var(--muted); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; }
+    footer nav { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+    footer .note { display: block; font-size: 13px; line-height: 1.55; margin-bottom: 20px; max-width: var(--wrap); }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--ink); }
+
+    /* Handy: Feinschliff (muss nach den Grundregeln stehen) */
+    @media (max-width: 700px) {
+      .duty { gap: 22px; }
+      .plan { padding: 22px; }
+      .plan ul { margin-top: 16px; padding-top: 14px; gap: 7px; }
+      .price { font-size: 34px; }
+      .plans { gap: 20px; }
+      .faq summary { padding: 15px 2px; font-size: 15.5px; }
+      .rules li { padding: 13px 16px; }
+      .family-row .btn { order: 2; }
+    }
+
+    /* Einblenden beim Scrollen — nur mit JS und ohne reduzierte Bewegung */
+    .js .rv { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+    .js .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .js .rv { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+    /* Look „objektdex“: motif=topo, soft=tint, edge=panel, cards=glass, steps=line, head=num, h2=normal, duty=grid, faq=lines, radius=18 (looks.js) */
+    :root { --radius: 18px; }
+    .btn { border-radius: 14px; }
+    .btn.sm { border-radius: 11px; }
+    .ic { border-radius: 11px; }
+    html.dark { --bg-soft: color-mix(in oklab, var(--bg) 88%, var(--accent)); }
+    section.soft { margin: 0 clamp(8px, 2vw, 28px); border-radius: clamp(22px, 3.4vw, 44px);
+      border: 1px solid color-mix(in oklab, var(--accent) 22%, transparent); }
+    section.soft + section.soft { margin-top: 16px; }
+    section.soft { position: relative; isolation: isolate; }
+    section.soft::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit;
+      background: var(--accent); opacity: 0.12;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='120' viewBox='0 0 240 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 20C40 4 80 36 120 20S200 4 240 20'/%3E%3Cpath d='M0 50C50 30 80 70 130 50S200 30 240 50'/%3E%3Cpath d='M0 82C30 66 90 100 140 80S210 70 240 82'/%3E%3Cpath d='M0 110C60 98 100 120 150 108S220 100 240 110'/%3E%3C/g%3E%3C/svg%3E"), linear-gradient(100deg, transparent 18%, #000 75%); -webkit-mask-size: 240px 120px, 100% 100%; -webkit-mask-repeat: repeat, no-repeat; -webkit-mask-composite: source-in;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='120' viewBox='0 0 240 120'%3E%3Cg fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 20C40 4 80 36 120 20S200 4 240 20'/%3E%3Cpath d='M0 50C50 30 80 70 130 50S200 30 240 50'/%3E%3Cpath d='M0 82C30 66 90 100 140 80S210 70 240 82'/%3E%3Cpath d='M0 110C60 98 100 120 150 108S220 100 240 110'/%3E%3C/g%3E%3C/svg%3E"), linear-gradient(100deg, transparent 18%, #000 75%); mask-size: 240px 120px, 100% 100%; mask-repeat: repeat, no-repeat; mask-composite: intersect; }
+    @media (max-width: 700px) { section.soft::before { opacity: 0.084; } }
+    .feature { border: 1px solid transparent;
+      background: linear-gradient(165deg, color-mix(in oklab, var(--accent) 13%, var(--bg)), color-mix(in oklab, var(--bg) 96%, #fff) 60%) padding-box,
+        linear-gradient(165deg, color-mix(in oklab, var(--accent) 70%, transparent), rgba(255,255,255,.07) 45%, rgba(255,255,255,.02)) border-box; }
+    .feature .ic { border-radius: 50%; background: var(--accent); color: var(--on-accent);
+      box-shadow: 0 10px 26px -10px color-mix(in oklab, var(--accent) 80%, transparent); }
+    main { counter-reset: sec; }
+    main > section { counter-increment: sec; }
+    .eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; font-variant-numeric: tabular-nums; }
+    .eyebrow::before { content: counter(sec, decimal-leading-zero) '  /  '; white-space: pre; color: var(--muted); }
+    .duty { grid-template-columns: 1fr; gap: 32px; }
+    .duty > .rv:first-child { max-width: 760px; }
+    .duty .rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; background: none; border: 0; box-shadow: none; }
+    .duty .rules li, .duty .rules li:first-child { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
+    .duty .rules li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    @media (max-width: 760px) { .duty .rules { grid-template-columns: 1fr; } }
+
+    .show { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .show-points { margin-top: 24px; }
+    @media (max-width: 860px) { .show { grid-template-columns: 1fr; gap: 28px; } .show-visual { order: 2; } }
+    .odsi { max-width: 440px; margin: 0 auto; padding: 18px 20px; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 14px; }
+    .od-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .od-head span { color: var(--muted); font-size: 14px; }
+    .od-row { display: grid; grid-template-columns: 1fr 90px auto; gap: 12px; align-items: center; }
+    .od-name { display: flex; flex-direction: column; font-weight: 700; font-size: 15px; } .od-name small { color: var(--muted); font-weight: 500; font-size: 13px; }
+    .od-bar { height: 8px; border-radius: 99px; background: color-mix(in oklab, var(--border) 80%, transparent); overflow: hidden; }
+    .od-bar i { display: block; height: 100%; width: var(--w); border-radius: 99px; background: var(--accent); transform-origin: left; animation: odFill 6s infinite both; }
+    .od-row b { color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 14px; }
+    .od-row b.od-neutral { color: var(--muted); font-weight: 650; }
+    .od-row:nth-child(3) i { animation-delay: .25s; } .od-row:nth-child(4) i { animation-delay: .5s; }
+    @keyframes odFill { 0% { transform: scaleX(0); } 30%, 100% { transform: scaleX(1); } }
+    @media (max-width: 420px) { .od-row { grid-template-columns: 1fr auto; } .od-bar { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .od-bar i { animation: none !important; transform: none !important; } }
+
+    /* Handy-Wand + Lichter in der App-Farbe (Kopfbereich) */
+    .hero.walled { isolation: isolate; min-height: min(780px, 100svh); display: flex; align-items: center;
+      background:
+        radial-gradient(55% 70% at 80% 30%, color-mix(in oklab, var(--accent) 34%, transparent), transparent 70%),
+        radial-gradient(40% 55% at 100% 90%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 70%),
+        radial-gradient(45% 60% at 0% 0%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 70%),
+        var(--bg); }
+    .hero.walled::before { display: none; }
+    .hero.walled::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background: linear-gradient(90deg, var(--bg) 0%, color-mix(in oklab, var(--bg) 92%, transparent) 30%, color-mix(in oklab, var(--bg) 40%, transparent) 56%, transparent 78%),
+        linear-gradient(0deg, var(--bg) 0%, color-mix(in oklab, var(--bg) 60%, transparent) 12%, transparent 34%); }
+    .hero.walled > .wrap { position: relative; z-index: 1; width: 100%; }
+    .wall { position: absolute; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+    .wall-in { position: absolute; top: -38%; left: 26%; width: 115%; height: 190%; display: flex; gap: 26px;
+      transform: perspective(2200px) rotateX(14deg) rotateZ(-15deg); transform-origin: 50% 0; opacity: .5; }
+    .col { flex: none; width: 160px; }
+    .col:nth-child(even) { margin-top: -140px; }
+    .track { animation: wall-up var(--d) linear infinite; will-change: transform; }
+    .col:nth-child(even) .track { animation-name: wall-down; }
+    @keyframes wall-up { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -50%, 0); } }
+    @keyframes wall-down { from { transform: translate3d(0, -50%, 0); } to { transform: translate3d(0, 0, 0); } }
+    .wall.paused .track { animation-play-state: paused; }
+    @media (prefers-reduced-motion: reduce) { .track { animation: none; } }
+    .mp { position: relative; margin-bottom: 26px; padding: 5px; border-radius: 26px; background: linear-gradient(160deg, #343947, #0d1018 45%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.07) inset, 0 24px 40px -22px rgba(0,0,0,.9); }
+    .mp::before { content: ''; display: block; height: 14px; border-radius: 21px 21px 0 0; background: var(--bar); }
+    .mp::after { content: ''; position: absolute; top: 9px; left: 50%; width: 32%; height: 8px; transform: translateX(-50%); border-radius: 99px; background: #000; }
+    .mp img { display: block; width: 100%; height: auto; aspect-ratio: 150 / 290; object-fit: cover; object-position: top; border-radius: 0 0 21px 21px; }
+    /* Lichtschein hinter den beiden Handys */
+    .hero.walled .shots::before { content: ''; position: absolute; inset: 8% 4% 10%; border-radius: 50%; z-index: -1; filter: blur(48px);
+      background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 55%, transparent), color-mix(in oklab, var(--accent) 18%, transparent) 60%, transparent); }
+    @media (max-width: 900px) {
+      .hero.walled { min-height: 0; }
+      .hero.walled::after { background: linear-gradient(180deg, color-mix(in oklab, var(--bg) 92%, transparent) 0%, color-mix(in oklab, var(--bg) 74%, transparent) 50%, color-mix(in oklab, var(--bg) 55%, transparent) 75%, var(--bg) 100%); }
+      .wall-in { left: -30%; top: -20%; width: 170%; opacity: .42; }
+    }
+    @media (max-width: 480px) { .col { width: 128px; } .wall-in { gap: 18px; } }
+
+    /* Kopf „objektdex“: phones=cascade, wall=straight, speed=1.15, frame=tint (looks.js) */
+    .shots .phone.a { left: 0; top: 76px; }
+    .shots .phone.b { right: 2%; top: 0; transform: scale(.9); transform-origin: top right; opacity: .9; }
+    @media (max-width: 900px) { .shots .phone.a { top: 44px; } }
+    .wall-in { top: -12%; left: 46%; width: 70%; height: 150%; transform: none; opacity: .42; }
+    .col:nth-child(even) { margin-top: -90px; }
+    @media (max-width: 900px) { .wall-in { left: -10%; top: -8%; width: 170%; opacity: .42; } }
+    .shots .phone { background: linear-gradient(160deg, color-mix(in oklab, var(--accent) 55%, #2b2b31), #0e0e11 46%); }
+    .track { animation-duration: calc(var(--d) * 1.15); }
+    .mp { border-radius: 28px; } .mp::before { border-radius: 23px 23px 0 0; } .mp img { border-radius: 0 0 23px 23px; }
+
+    /* App-Familie: Suite-Block + Block „Weitere Apps“ (eigener Tarif) */
+    .fam-self { display: inline-flex; align-items: center; gap: 7px; margin-top: 16px; padding: 6px 13px; border-radius: 99px; font-size: 14px; font-weight: 600;
+      background: color-mix(in oklab, var(--accent) 16%, transparent); color: var(--accent-text); }
+    .fam-self .i { width: 16px; height: 16px; }
+    .fam-self.own { background: transparent; color: var(--ink); border: 1px dashed color-mix(in oklab, var(--ink) 40%, transparent); }
+    .fam-tier { margin-top: 30px; }
+    .fam-tier.own { margin-top: 26px; padding-top: 24px; border-top: 1px dashed var(--border); }
+    .fam-tier .family { margin-top: 12px; }
+    .fam-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 15px; }
+    .fam-head b { font-weight: 650; }
+    .fam-tag { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 99px; font-size: 12px; font-weight: 700; letter-spacing: .02em;
+      background: color-mix(in oklab, var(--accent) 18%, transparent); color: var(--accent-text); }
+    .fam-tag .i { width: 14px; height: 14px; }
+    .fam-tag.own { background: transparent; color: var(--muted); border: 1px dashed color-mix(in oklab, var(--muted) 70%, transparent); }
+    @media (max-width: 480px) { .fam-head { font-size: 14px; } .fam-tier .family { margin-top: 8px; } }
+  </style>
+  <script>document.documentElement.classList.add('js')</script>
+
+  <style>
+    /* Ratgeber-Ergänzungen (Tabelle, Kurzantwort, Quellen) — neutral, passt zu hellem und dunklem Design */
+    .rg-scroll { overflow-x: auto; margin: 10px 0 22px; -webkit-overflow-scrolling: touch; }
+    .rg-table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; min-width: 520px; }
+    .rg-table th, .rg-table td { border: 1px solid rgba(127,127,127,.32); padding: 9px 11px; text-align: left; vertical-align: top; }
+    .rg-table th { background: rgba(127,127,127,.12); font-weight: 800; }
+    .rg-kurz { border: 1px solid rgba(127,127,127,.35); border-radius: 12px; padding: 16px 18px; margin: 18px 0 24px; background: rgba(127,127,127,.07); }
+    .rg-kurz > b:first-child { display: block; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; opacity: .8; }
+    .rg-kurz ul { margin: 6px 0 0; padding-left: 20px; }
+    .rg-kurz li { margin-bottom: 5px; }
+    .rg-quellen { font-size: 14px; opacity: .9; }
+    .rg-quellen li { font-size: 14px !important; margin-bottom: 4px; }
+    .rg-weiter { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin: 12px 0 26px; }
+    .rg-weiter a { display: block; border: 1px solid rgba(127,127,127,.35); border-radius: 10px; padding: 12px 14px; text-decoration: none; font-weight: 700; }
+    .rg-weiter a span { display: block; font-weight: 400; font-size: 13.5px; opacity: .75; margin-top: 2px; }
+  </style>
+  <style>
+    /* Ratgeber-Unterseite auf Basis der Startseiten-Gestaltung */
+    .rg { max-width: 820px; padding-top: 30px; padding-bottom: 64px; }
+    .rg-crumb { font-size: 13px; color: var(--muted); margin: 6px 0 18px; }
+    .rg a:not(.btn) { color: var(--accent-text); }
+    .rg-kicker { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text); margin: 0 0 6px; }
+    .rg h1 { font-size: clamp(30px, 4.2vw, 44px); line-height: 1.1; margin: 8px 0 16px; }
+    .rg h2 { font-size: clamp(22px, 2.6vw, 28px); line-height: 1.2; margin: 44px 0 12px; }
+    .rg h3 { font-size: 18px; font-weight: 700; margin: 24px 0 8px; }
+    .rg p, .rg li { font-size: 16.5px; line-height: 1.7; color: color-mix(in oklab, var(--ink) 86%, transparent); }
+    .rg p { margin: 0 0 14px; }
+    .rg ul, .rg ol { padding-left: 22px; margin: 4px 0 18px; }
+    .rg li { margin-bottom: 6px; }
+    .rg strong { color: var(--ink); }
+    .rg .rg-lead { font-size: 18.5px; color: var(--muted); }
+    .rg .rg-stand { font-size: 13px; color: var(--muted); }
+    .rg-cta { border: 1px solid var(--border); background: var(--surface); border-radius: var(--radius); padding: 24px 24px 26px; margin: 44px 0 10px; }
+    .rg-cta h3 { margin-top: 0; font-size: 21px; }
+    .rg-faq { border-top: 1px solid var(--border); }
+    .rg-faq details { border-bottom: 1px solid var(--border); }
+    .rg-faq summary { cursor: pointer; list-style: none; font-weight: 650; font-size: 16.5px; padding: 15px 28px 15px 0; position: relative; }
+    .rg-faq summary::-webkit-details-marker { display: none; }
+    .rg-faq summary::after { content: '+'; position: absolute; right: 2px; top: 11px; font-size: 22px; color: var(--accent-text); }
+    .rg-faq details[open] summary::after { content: '\2013'; }
+    .rg-faq details p { margin: 0 0 16px; }
+    .rg .rg-hinweis { font-size: 13.5px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 14px; margin-top: 30px; }
+  </style>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Laub auf dem Gehweg: Reinigungspflicht in Deutschland und Österreich und wie man sie belegt","description":"Laub auf dem Gehweg: wer in Deutschland und Österreich kehren muss, was § 93 StVO und die Straßenreinigungssatzung verlangen und wie man es belegt.","inLanguage":"de","datePublished":"2026-11-24","dateModified":"2026-11-24","author":{"@type":"Organization","name":"Dexware","url":"https://dexware.app/"},"publisher":{"@type":"Organization","name":"Dexware","url":"https://dexware.app/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://objektdex.dexware.app/ratgeber-gehweg-reinigen-laub.html"},"image":"https://objektdex.dexware.app/objektdex-icon.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ObjektDex","item":"https://objektdex.dexware.app/"},{"@type":"ListItem","position":2,"name":"Ratgeber","item":"https://dexware.app/ratgeber.html"},{"@type":"ListItem","position":3,"name":"Laub auf dem Gehweg","item":"https://objektdex.dexware.app/ratgeber-gehweg-reinigen-laub.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Muss ich im Herbst Laub vom Gehweg entfernen?","acceptedAnswer":{"@type":"Answer","text":"In Österreich verpflichtet § 93 StVO Liegenschaftseigentümer im Ortsgebiet, Gehsteige entlang der Liegenschaft von 6 bis 22 Uhr von Verunreinigungen zu säubern; Laub wird üblicherweise dazugezählt. In Deutschland hängt es von der Straßenreinigungssatzung der Gemeinde ab, viele übertragen die Gehwegreinigung auf die Anlieger."}},{"@type":"Question","name":"Wer haftet, wenn jemand auf nassem Laub ausrutscht?","acceptedAnswer":{"@type":"Answer","text":"Das hängt vom Einzelfall ab: von der Pflicht nach Satzung oder § 93 StVO, davon, ob die Pflicht übertragen wurde, und davon, ob zumutbar gereinigt wurde. Ein Nachweis mit Datum, Uhrzeit und Foto hilft zu zeigen, dass regelmäßig gekehrt wurde."}},{"@type":"Question","name":"Darf ich Laub auf die Straße kehren?","acceptedAnswer":{"@type":"Answer","text":"In der Regel nicht. Viele Satzungen untersagen, Kehricht und Laub auf die Fahrbahn oder in Straßenabläufe zu kehren, in Österreich dürfen Wasserablaufgitter nach § 93 Abs. 3 StVO nicht verlegt werden. Wie Laub entsorgt wird, regelt die Gemeinde."}},{"@type":"Question","name":"Kann die Pflicht auf Mieter oder eine Hausbetreuung übertragen werden?","acceptedAnswer":{"@type":"Answer","text":"Ja, per Vertrag oder Mietvertrag. In Österreich tritt der Übernehmer nach § 93 Abs. 5 StVO an die Stelle des Eigentümers, in Deutschland ist die Übertragung üblich. Wer überträgt, sollte die Erledigung kontrollieren und sich Nachweise geben lassen."}},{"@type":"Question","name":"Wie oft muss gekehrt werden?","acceptedAnswer":{"@type":"Answer","text":"Das legen Satzung und Vertrag fest; manche Satzungen nennen feste Tage, andere eine Reinigung bei Bedarf. In der Hauptzeit des Laubfalls und nach Sturm oder Regen ist oft mehr nötig als im Rest des Jahres."}}]}</script>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="ObjektDex Startseite"><img src="assets/apps/objektdex.webp" alt="" width="32" height="32" /><span class="wm">Objekt<span>Dex</span></span></a>
+      <nav aria-label="Seitennavigation"><a href="index.html#funktionen">Funktionen</a><a href="index.html#preise">Preise</a><a href="index.html#faq">FAQ</a></nav>
+      <a class="btn sm" href="index.html#ablauf">Bald verfügbar</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap rg">
+      <p class="rg-crumb"><a href="index.html">Start</a> › Ratgeber › Laub auf dem Gehweg</p>
+      <p class="rg-kicker">Ratgeber</p>
+      <h1>Laub auf dem Gehweg: <em>wer kehren muss und wie man es belegt</em></h1>
+      <p class="land-hinweis" style="margin:16px 0 20px;padding:12px 16px;border:1px solid rgba(127,127,127,.35);border-radius:12px;font-size:14.5px;line-height:1.55"><strong>Gilt für welches Land?</strong> In <strong>Deutschland</strong> regelt die Straßenreinigungssatzung der Gemeinde, ob Anlieger Gehwege reinigen müssen; dazu kommt die Verkehrssicherungspflicht (§ 823 BGB). In <strong>Österreich</strong> verpflichtet § 93 StVO Liegenschaftseigentümer im Ortsgebiet, Gehsteige von 6 bis 22 Uhr von Schnee und Verunreinigungen zu säubern.</p>
+      <p class="rg-stand">Stand: November 2026 · Lesezeit ca. 5 Minuten · Für Eigentümer, Hausverwaltungen, Hausbetreuung und Winterdienst-Betriebe</p>
+      <p class="rg-lead">Nasses Laub kann auf Gehwegen ähnlich rutschig sein wie Glätte im Winter. Wer im Herbst kehren muss, wie oft und wie man es belegt, hängt vom Land und von der Gemeinde ab. Dieser Ratgeber fasst zusammen, <strong>was für Eigentümer, Hausverwaltungen und Hausbetreuung gilt</strong> und wie ein Nachweis aussieht.</p>
+
+      <div class="rg-kurz"><b>Die Antwort in Kürze</b>
+  <ul>
+    <li><strong>Österreich:</strong> § 93 StVO verpflichtet Eigentümer im Ortsgebiet, Gehsteige entlang der Liegenschaft von 6 bis 22 Uhr von Schnee <strong>und Verunreinigungen</strong> zu säubern; Laub wird üblicherweise dazugezählt.</li>
+    <li><strong>Deutschland:</strong> Ob Anlieger reinigen müssen, steht in der <strong>Straßenreinigungssatzung</strong> der Gemeinde; viele Gemeinden übertragen die Gehwegreinigung auf die Anlieger.</li>
+    <li>Die Arbeit lässt sich per Vertrag an eine Hausbetreuung oder an Mieter übertragen. Wer vergibt, sollte die Erledigung kontrollieren.</li>
+    <li>Ein Nachweis mit <strong>Datum, Uhrzeit und Foto</strong> je Reinigung zeigt, dass regelmäßig gekehrt wurde.</li>
+  </ul>
+</div>
+
+      <h2>Österreich: § 93 StVO gilt auch ohne Schnee</h2>
+      <p>
+        Viele kennen § 93 StVO nur vom Schneeräumen. Die Bestimmung verpflichtet Eigentümer von Liegenschaften im Ortsgebiet aber
+        auch, die Gehsteige und Gehwege entlang der Liegenschaft, die nicht mehr als 3 Meter entfernt sind, in der Zeit von 6 bis
+        22 Uhr <strong>von Schnee und Verunreinigungen</strong> zu säubern. Gibt es keinen Gehsteig, ist der Straßenrand in einer
+        Breite von 1 Meter zu säubern. Laub, Schmutz und Abfälle auf dem Gehsteig werden üblicherweise als solche
+        Verunreinigungen angesehen. Bei der Arbeit dürfen Wasserablaufgitter und Rinnsale nicht verlegt werden (§ 93 Abs. 3 StVO).
+      </p>
+      <p>
+        Wird die Pflicht durch einen Vertrag übertragen, etwa an eine Hausbetreuung, tritt der Übernehmer an die Stelle des
+        Eigentümers (§ 93 Abs. 5 StVO). Das ist dieselbe Regel wie beim Winterdienst. Mehr zu Flächen, Zeiten und Übertragung
+        steht im <a href="https://winterdex.dexware.app/ratgeber-schneeraeumung-oesterreich.html">Ratgeber zu § 93 StVO</a>.
+      </p>
+
+      <h2>Deutschland: die Satzung der Gemeinde entscheidet</h2>
+      <p>
+        In Deutschland ist die Reinigung öffentlicher Straßen zunächst Aufgabe der Gemeinde. Das Landesrecht erlaubt es den
+        Gemeinden, die Reinigung der Gehwege per Satzung auf die Anlieger zu übertragen, und viele tun das. In der
+        Straßenreinigungssatzung steht dann, welche Flächen, wie oft und was dazugehört, etwa Laub, Unkraut oder Schmutz. Manche
+        Satzungen nennen feste Tage, andere verlangen eine Reinigung bei Bedarf.
+      </p>
+      <p>
+        Unabhängig von der Satzung gilt die allgemeine Verkehrssicherungspflicht (§ 823 BGB): Wer für einen Weg verantwortlich
+        ist, muss vermeidbare Gefahren beseitigen, und dazu kann nasses Laub gehören. Für private Wege auf dem Grundstück, etwa den
+        Zugang zum Haus, den Weg zu den Mülltonnen oder einen Kundenparkplatz, ist ohnehin der Eigentümer zuständig.
+      </p>
+
+      <h2>Wie oft kehren?</h2>
+      <p>
+        Eine Zahl für alle Fälle gibt es nicht. Maßgeblich sind Satzung, Vertrag und die Lage vor Ort: Unter großen Bäumen kann in
+        der Hauptzeit des Laubfalls eine Reinigung pro Woche zu wenig sein, nach Sturm oder Regen ist ein zusätzlicher Durchgang
+        sinnvoll. Laub gehört nicht auf die Fahrbahn und nicht in Straßenabläufe; viele Satzungen untersagen das ausdrücklich.
+        Wohin mit dem Laub, ob Biotonne, Grünschnittsammlung oder Abtransport, regelt die Gemeinde.
+      </p>
+
+      <h2>Was in den Nachweis gehört</h2>
+<div class="rg-scroll">
+  <table class="rg-table">
+    <thead><tr><th>Angabe</th><th>Warum</th></tr></thead>
+    <tbody>
+      <tr><td>Datum und Uhrzeit</td><td>zeigt, dass regelmäßig und innerhalb der Pflichtzeiten gereinigt wurde</td></tr>
+      <tr><td>Flächen</td><td>Gehsteig entlang der Liegenschaft, Zugänge, Hof, Parkplatz</td></tr>
+      <tr><td>Foto nach der Arbeit</td><td>hält den Zustand fest, der sich mit dem nächsten Windstoß wieder ändert</td></tr>
+      <tr><td>Person</td><td>wer gekehrt hat, eigener Mitarbeiter oder Dienstleister</td></tr>
+      <tr><td>Besonderheiten</td><td>Sturm, starker Laubfall, Abtransport, zugeparkte Flächen</td></tr>
+      <tr><td>Mängel</td><td>lose Platten, Stolperstellen, verstopfte Abläufe, und an wen sie gemeldet wurden</td></tr>
+    </tbody>
+  </table>
+</div>
+      <p>
+        Das gleiche Muster kennen viele vom Streuprotokoll im Winter. Wer beides festhält, hat das ganze Jahr über einen
+        durchgehenden Nachweis für die Wege rund ums Haus.
+      </p>
+
+      <h2>Quellen</h2>
+<ul class="rg-quellen">
+  <li><a href="https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&amp;Gesetzesnummer=10011336&amp;Paragraf=93" rel="noopener">§ 93 StVO 1960</a> (Österreich, Pflichten der Anrainer)</li>
+  <li><a href="https://www.gesetze-im-internet.de/bgb/__823.html" rel="noopener">§ 823 BGB</a> (Deutschland, Verkehrssicherungspflicht)</li>
+  <li>Straßenreinigungssatzung der jeweiligen Gemeinde (Deutschland)</li>
+</ul>
+
+      <div class="rg-cta">
+        <h3>Kehren und Laub belegen mit ObjektDex</h3>
+        <p>In <b>ObjektDex</b> sind „Kehren“ und „Laub entfernen“ eigene Leistungen mit Turnus, etwa wöchentlich oder nach Bedarf. Am Objekt tippst du auf „Dokumentieren“: Die fälligen Leistungen sind angehakt, Fotos und Notiz kommen dazu, Uhrzeit und Standort werden festgehalten. Mit Pro zeichnest du Kehrrunden über längere Gehwege auf, mit Abdeckung in Prozent. Am Monatsende gibt es das PDF mit Soll/Ist für den Auftraggeber. ObjektDex dokumentiert die Arbeit; Ausführung und Verkehrssicherung bleiben in der Verantwortung des Betriebs bzw. Eigentümers. ObjektDex ist bald bei Google Play verfügbar.</p>
+        <a class="btn" href="index.html">ObjektDex ansehen</a>
+      </div>
+      <p>Im Winter: Räum- und Streueinsätze mit <a href="https://winterdex.dexware.app/">WinterDex</a> nachweisen – Strecken, Uhrzeit, Wetter und Fotos, mit derselben Bedienung.</p>
+
+      <h2>Häufige Fragen</h2>
+      <div class="rg-faq">
+        <details><summary>Muss ich im Herbst Laub vom Gehweg entfernen?</summary><p>In Österreich verpflichtet § 93 StVO Liegenschaftseigentümer im Ortsgebiet, Gehsteige entlang der Liegenschaft von 6 bis 22 Uhr von Verunreinigungen zu säubern; Laub wird üblicherweise dazugezählt. In Deutschland hängt es von der Straßenreinigungssatzung der Gemeinde ab, viele übertragen die Gehwegreinigung auf die Anlieger.</p></details>
+        <details><summary>Wer haftet, wenn jemand auf nassem Laub ausrutscht?</summary><p>Das hängt vom Einzelfall ab: von der Pflicht nach Satzung oder § 93 StVO, davon, ob die Pflicht übertragen wurde, und davon, ob zumutbar gereinigt wurde. Ein Nachweis mit Datum, Uhrzeit und Foto hilft zu zeigen, dass regelmäßig gekehrt wurde.</p></details>
+        <details><summary>Darf ich Laub auf die Straße kehren?</summary><p>In der Regel nicht. Viele Satzungen untersagen, Kehricht und Laub auf die Fahrbahn oder in Straßenabläufe zu kehren, in Österreich dürfen Wasserablaufgitter nach § 93 Abs. 3 StVO nicht verlegt werden. Wie Laub entsorgt wird, regelt die Gemeinde.</p></details>
+        <details><summary>Kann die Pflicht auf Mieter oder eine Hausbetreuung übertragen werden?</summary><p>Ja, per Vertrag oder Mietvertrag. In Österreich tritt der Übernehmer nach § 93 Abs. 5 StVO an die Stelle des Eigentümers, in Deutschland ist die Übertragung üblich. Wer überträgt, sollte die Erledigung kontrollieren und sich Nachweise geben lassen.</p></details>
+        <details><summary>Wie oft muss gekehrt werden?</summary><p>Das legen Satzung und Vertrag fest; manche Satzungen nennen feste Tage, andere eine Reinigung bei Bedarf. In der Hauptzeit des Laubfalls und nach Sturm oder Regen ist oft mehr nötig als im Rest des Jahres.</p></details>
+      </div>
+
+      <h2>Weiterlesen</h2>
+<div class="rg-weiter">
+  <a href="https://winterdex.dexware.app/ratgeber-schneeraeumung-oesterreich.html">Schneeräumpflicht in Österreich<span>Im Winter: § 93 StVO, Flächen und Zeiten</span></a>
+  <a href="https://winterdex.dexware.app/ratgeber-raeum-streupflicht.html">Räum- und Streupflicht<span>Im Winter: Haftung, Übertragung, Nachweis</span></a>
+  <a href="ratgeber-gruenpflege-dokumentieren.html">Grünpflege dokumentieren<span>Mähen, Hecke und Laub nachweisbar machen</span></a>
+  <a href="ratgeber-leistungsnachweis-hausbetreuung.html">Leistungsnachweis Hausbetreuung<span>Was in den Nachweis für die Hausverwaltung gehört</span></a>
+</div>
+
+      <p class="rg-hinweis">Dieser Ratgeber gibt einen allgemeinen Überblick (Stand 11/2026) und ersetzt keine Rechtsberatung. Maßgeblich sind die Satzung und Verordnungen der Gemeinde, der Vertrag mit dem Auftraggeber und die jeweils geltenden Gesetze.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 ObjektDex · ein Produkt von <a href="https://dexware.app/">Dexware</a></span>
+      <nav aria-label="Rechtliches"><a href="ratgeber-leistungsnachweis-hausbetreuung.html">Ratgeber</a><a href="ratgeber-gruenpflege-dokumentieren.html">Grünpflege dokumentieren</a><a href="ratgeber-kontrollgang-wohnanlage.html">Kontrollgang Wohnanlage</a><a href="ratgeber-treppenhausreinigung-nachweis.html">Treppenhausreinigung</a><a href="impressum.html">Impressum</a><a href="agb.html">AGB</a><a href="datenschutz.html">Datenschutz</a><a href="avv.html">AVV</a><a href="konto-loeschung.html">Konto löschen</a><a href="mailto:support@dexware.app?subject=ObjektDex%20Support">Support</a></nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var top = document.querySelector('.top');
+      var onScroll = function () { top.classList.toggle('scrolled', window.scrollY > 8); };
+      onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+      var wall = document.querySelector('.wall');
+      if (wall && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) { wall.classList.toggle('paused', !es[0].isIntersecting); }).observe(wall);
+      }
+      var els = document.querySelectorAll('.rv');
+      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(function (e) { e.classList.add('in'); }); return;
+      }
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+  </script>
+</body>
+</html>

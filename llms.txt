@@ -1,0 +1,51 @@
+# ObjektDex
+
+> ObjektDex ist eine App von Dexware. Hausbetreuung und Reinigung belegen: Einsatz mit Zeit, Ort und Fotos, Leistungen mit Turnus, PDF mit Soll/Ist für die Hausverwaltung. Gratis für 2 Objekte. ObjektDex kommt bald zu Google Play.
+
+Sachliche Kurzinfo für Sprachmodelle und Suchdienste. Maßgeblich sind die Angaben auf https://objektdex.dexware.app/. Anbieter: Dexware (https://dexware.app/), Kontakt: support@dexware.app.
+
+## Was ObjektDex macht
+
+- Objekte und Heute: Adresse, Auftraggeber und Leistungen aus Vorlagen (Treppenhaus, Mülltonnen, Rasen, Hecke, Laub, Kontrollgang, Spielplatz) oder eigene. „Heute“ zeigt grün erledigt, orange offen, rot überfällig, auf Wunsch mit Erinnerung am Morgen.
+- Einsatz mit einem Tipp: Fällige Leistungen sind vorgewählt, Fotos und Notiz dazu. Beginn, Ende und Standort hält die App fest, den Standort nur in diesem Moment. Mängel mit Foto melden, sie bleiben sichtbar, bis jemand sie erledigt.
+- PDF-Nachweis, auch im Funkloch: Je Objekt und Zeitraum: alle Einsätze mit Datum, Uhrzeit und Person, Soll/Ist je Leistung, Fotos, Mängel und Prüfcode. Ohne Netz wartet alles am Handy und geht mit der echten Uhrzeit raus.
+
+## Für wen
+
+Für Hausbetreuung, Reinigung & Grünpflege.
+
+## Preise
+
+- Gratis (für immer): 2 Objekte mit allen Grundfunktionen; Heute, Einsätze, Mängel; PDF-Nachweis mit Hinweis „Gratis-Version“
+- Pro (monatlich oder jährlich — Preis im Store). Enthält: Unbegrenzt Objekte; Team bis 20 Mitarbeiter (größere Teams als Team-Stufe); Link für die Hausverwaltung; Runden: Kehr-, Mäh- und Kontrollrunden; Eigenes Logo im PDF
+- Preise inkl. MwSt., Abo jederzeit kündbar.
+
+## Kurz beantwortet
+
+- Wird mein Team geortet? Nein, es gibt keine Dauer-Ortung. Der Standort wird nur in dem Moment erfasst, in dem jemand einen Einsatz dokumentiert — und nur, wenn er das erlaubt.
+- Was sieht die Hausverwaltung über den Link? Die Einsätze der letzten 90 Tage mit Leistungen, Uhrzeit, Notiz und Fotos, das Soll/Ist für diesen Monat und den Vormonat und die Mängel. Personen nur mit Vornamen und Anfangsbuchstaben des Nachnamens, keine Koordinaten.
+- Und im Winter? Für Räumen und Streuen gibt es WinterDex mit derselben Bedienung: Objekte, Strecken, Einsatz mit Uhrzeit, Standort und Foto, PDF-Nachweis.
+- Ist das eine Zeiterfassung? Nein. ObjektDex belegt Leistungen am Objekt. Für Lohnabrechnung, Angebote oder Rechnungen ist es nicht gedacht.
+- Alle Antworten: https://objektdex.dexware.app/#faq
+
+## Seiten
+
+- [Startseite](https://objektdex.dexware.app/): Funktionen, Preise, häufige Fragen
+- [Preise](https://objektdex.dexware.app/#preise): Gratis und Pro
+- [Häufige Fragen](https://objektdex.dexware.app/#faq)
+- [Dexware](https://dexware.app/): alle Apps von Dexware
+
+## Ratgeber
+
+- [Laub auf dem Gehweg: Pflicht und Nachweis](https://objektdex.dexware.app/ratgeber-gehweg-reinigen-laub.html): Laub auf dem Gehweg: wer in Deutschland und Österreich kehren muss, was § 93 StVO und die Straßenreinigungssatzung verlangen und wie man es belegt.
+- [Grünpflege dokumentieren: Mähen, Hecke, Laub](https://objektdex.dexware.app/ratgeber-gruenpflege-dokumentieren.html): Grünpflege nachweisen: was beim Mähen, Heckenschnitt und Laub ins Protokoll gehört, Schnitt- und Lärmzeiten, Ausfälle und Soll/Ist für den Auftraggeber.
+- [Kontrollgang Wohnanlage: Checkliste und Nachweis](https://objektdex.dexware.app/ratgeber-kontrollgang-wohnanlage.html): Kontrollgang in der Wohnanlage: Checkliste von Eingang bis Dach, wie oft kontrolliert wird, was ins Protokoll gehört und warum auch „ohne Befund“ zählt.
+- [Leistungsnachweis Hausbetreuung: was rein muss](https://objektdex.dexware.app/ratgeber-leistungsnachweis-hausbetreuung.html): Was gehört in den Leistungsnachweis für Hausbetreuung, Reinigung und Grünpflege? Soll/Ist je Leistung, Turnus, Fotos, Mängel und warum Verwaltungen ihn brauchen.
+- [Treppenhausreinigung nachweisen: Reinigungsplan](https://objektdex.dexware.app/ratgeber-treppenhausreinigung-nachweis.html): Treppenhausreinigung nachweisen: was in den Reinigungsplan gehört, übliche Turnusse, Unterschriftenliste oder Foto und wie Verwaltungen kontrollieren.
+
+## Rechtliches
+
+- [Impressum](https://objektdex.dexware.app/impressum.html)
+- [Datenschutz](https://objektdex.dexware.app/datenschutz.html)
+- [AGB](https://objektdex.dexware.app/agb.html)
+- [AVV](https://objektdex.dexware.app/avv.html)
